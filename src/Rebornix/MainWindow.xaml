@@ -20,44 +20,112 @@
         </Grid.ColumnDefinitions>
 
         <!-- ═══════════ Sol menü ═══════════ -->
-        <Border Background="{StaticResource SidebarBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
-            <DockPanel Margin="14,18,14,14">
-                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="6,0,0,22">
-                    <Image Source="{StaticResource LogoImage}" Width="36" Height="36" />
-                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Rebornix" FontSize="17" FontWeight="Bold" />
-                        <TextBlock Text="{h:Loc App_Tagline}" Style="{StaticResource Caption}" />
-                    </StackPanel>
-                </StackPanel>
+        <Border Background="{StaticResource SidebarBrush}" BorderThickness="0,0,1,0">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#557B61FF" Offset="0" />
+                    <GradientStop Color="#FF232A3C" Offset="0.35" />
+                    <GradientStop Color="#FF232A3C" Offset="1" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Grid ClipToBounds="True">
+                <!-- Üstte hafif renkli parıltı -->
+                <Ellipse Width="340" Height="300" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-120,-170,0,0" IsHitTestVisible="False">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#557B61FF" Offset="0" />
+                            <GradientStop Color="#007B61FF" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
 
-                <StackPanel DockPanel.Dock="Bottom" Margin="4,10,4,0">
-                    <Border Style="{StaticResource Badge}" Background="{StaticResource WarningSoftBrush}" Margin="0,0,0,8"
-                            Visibility="{Binding IsDryRun, Converter={StaticResource BoolToVis}}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="&#xE7BA;" Style="{StaticResource Icon}" FontSize="12" Foreground="{StaticResource WarningBrush}" Margin="0,0,6,0" />
-                            <TextBlock Text="{h:Loc Dry_Chip}" Style="{StaticResource BadgeText}" Foreground="{StaticResource WarningBrush}" />
+                <DockPanel Margin="12,18,12,14">
+                    <!-- Logo -->
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="6,0,0,24">
+                        <Grid Width="42" Height="42">
+                            <Ellipse x:Name="LogoPulse" Width="42" Height="42" RenderTransformOrigin="0.5,0.5" Opacity="0.6">
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="#AA8B5CF6" Offset="0" />
+                                        <GradientStop Color="#008B5CF6" Offset="1" />
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                                <Ellipse.RenderTransform>
+                                    <ScaleTransform x:Name="LogoPulseScale" ScaleX="1.2" ScaleY="1.2" />
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+                            <Image Source="{StaticResource LogoImage}" Width="38" Height="38" />
+                        </Grid>
+                        <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="Rebornix" FontSize="18" FontWeight="Bold" Foreground="{StaticResource AccentGradientH}" />
+                            <TextBlock Text="{h:Loc App_Tagline}" Style="{StaticResource Caption}" />
                         </StackPanel>
-                    </Border>
-                    <Border Style="{StaticResource Badge}" Background="{StaticResource DangerSoftBrush}" Margin="0,0,0,8"
-                            Visibility="{Binding IsAdmin, Converter={StaticResource InvBoolToVis}}">
-                        <TextBlock Text="{h:Loc Home_AdminMissingShort}" Style="{StaticResource BadgeText}" Foreground="{StaticResource DangerBrush}" />
-                    </Border>
-                </StackPanel>
+                    </StackPanel>
 
-                <ListBox ItemsSource="{Binding NavItems}" SelectedItem="{Binding SelectedNav}" Style="{StaticResource NavList}"
-                         ItemContainerStyle="{StaticResource NavItem}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
+                    <StackPanel DockPanel.Dock="Bottom" Margin="4,10,4,0">
+                        <Border Style="{StaticResource Badge}" Background="{StaticResource WarningSoftBrush}" BorderBrush="#40FBBF24" Margin="0,0,0,8"
+                                Visibility="{Binding IsDryRun, Converter={StaticResource BoolToVis}}">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Glyph}" Style="{StaticResource Icon}" FontSize="16"
-                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" />
-                                <TextBlock Text="{Binding Title}" Margin="14,0,0,0" FontSize="14" VerticalAlignment="Center"
-                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" />
+                                <TextBlock Text="&#xE7BA;" Style="{StaticResource Icon}" FontSize="11" Foreground="{StaticResource WarningBrush}" Margin="0,0,6,0" />
+                                <TextBlock Text="{h:Loc Dry_Chip}" Style="{StaticResource BadgeText}" Foreground="{StaticResource WarningBrush}" />
                             </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource Badge}" Background="{StaticResource DangerSoftBrush}" BorderBrush="#40F87171" Margin="0,0,0,8"
+                                Visibility="{Binding IsAdmin, Converter={StaticResource InvBoolToVis}}">
+                            <TextBlock Text="{h:Loc Home_AdminMissingShort}" Style="{StaticResource BadgeText}" Foreground="{StaticResource DangerBrush}" />
+                        </Border>
+                    </StackPanel>
+
+                    <ListBox x:Name="NavList" ItemsSource="{Binding NavItems}" SelectedItem="{Binding SelectedNav}" Style="{StaticResource NavList}"
+                             ItemContainerStyle="{StaticResource NavItem}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <!-- Sayfanın kendi rengindeki ikon kutucuğu -->
+                                    <Grid Width="32" Height="32" RenderTransformOrigin="0.5,0.5">
+                                        <Grid.RenderTransform>
+                                            <ScaleTransform x:Name="TileScale" />
+                                        </Grid.RenderTransform>
+                                        <Border CornerRadius="10" Background="{Binding Tint}" />
+                                        <Border x:Name="TileOn" CornerRadius="10" Background="{Binding Gradient}" Opacity="0">
+                                            <Border CornerRadius="10" BorderThickness="0,1,0,0" BorderBrush="#50FFFFFF" />
+                                        </Border>
+                                        <TextBlock x:Name="Glyph" Text="{Binding Glyph}" Style="{StaticResource Icon}" FontSize="15"
+                                                   Foreground="{Binding Accent}" HorizontalAlignment="Center" />
+                                    </Grid>
+                                    <TextBlock Text="{Binding Title}" Margin="12,0,0,0" FontSize="14" VerticalAlignment="Center"
+                                               Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" />
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+                                        <Setter TargetName="Glyph" Property="Foreground" Value="White" />
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="TileOn" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.25" />
+                                                    <DoubleAnimation Storyboard.TargetName="TileScale" Storyboard.TargetProperty="ScaleX" From="0.8" To="1" Duration="0:0:0.45">
+                                                        <DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.8" /></DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                    <DoubleAnimation Storyboard.TargetName="TileScale" Storyboard.TargetProperty="ScaleY" From="0.8" To="1" Duration="0:0:0.45">
+                                                        <DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.8" /></DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="TileOn" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Grid>
         </Border>
 
         <!-- ═══════════ İçerik + alt panel ═══════════ -->

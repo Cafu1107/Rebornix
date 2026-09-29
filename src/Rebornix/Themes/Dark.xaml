@@ -164,16 +164,21 @@
         <Setter Property="Padding" Value="14,10" />
     </Style>
     <Style x:Key="Badge" TargetType="Border">
-        <Setter Property="CornerRadius" Value="999" />
-        <Setter Property="Padding" Value="10,3,10,4" />
-        <Setter Property="Background" Value="{StaticResource AccentSoftBrush}" />
+        <!-- Kapsül: yarıçap = yüksekliğin yarısı (999 gibi büyük değer WPF'te ezik elips üretir) -->
+        <Setter Property="CornerRadius" Value="11" />
+        <Setter Property="MinHeight" Value="22" />
+        <Setter Property="Padding" Value="10,2,10,2" />
+        <Setter Property="Background" Value="#267B61FF" />
+        <Setter Property="BorderBrush" Value="#1FFFFFFF" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
     <Style x:Key="BadgeText" TargetType="TextBlock">
         <Setter Property="FontSize" Value="11.5" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+        <Setter Property="Foreground" Value="#FFD9D2FF" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="Banner" TargetType="Border">
         <Setter Property="CornerRadius" Value="10" />
@@ -684,31 +689,64 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
-                    <Grid>
-                        <Border x:Name="Bd" Background="Transparent" CornerRadius="8" Padding="12,9" />
-                        <Border x:Name="Pill" Width="3" Height="18" CornerRadius="2" Background="{StaticResource AccentBrush}"
-                                HorizontalAlignment="Left" Margin="0,0,0,0" Opacity="0" />
-                        <ContentPresenter Margin="14,9,12,9" />
+                    <Grid Background="Transparent">
+                        <Border x:Name="Hover" CornerRadius="11" Background="#0FFFFFFF" Opacity="0" />
+                        <Border x:Name="Sel" CornerRadius="11" Background="{StaticResource SelectedNavBrush}" BorderBrush="#1AFFFFFF" BorderThickness="1" Opacity="0" />
+                        <Border x:Name="Pill" Width="4" Height="22" CornerRadius="2" Background="{StaticResource AccentGradient}"
+                                HorizontalAlignment="Left" Opacity="0" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform x:Name="PillScale" ScaleY="0.2" />
+                            </Border.RenderTransform>
+                        </Border>
+                        <ContentPresenter Margin="12,6,10,6">
+                            <ContentPresenter.RenderTransform>
+                                <TranslateTransform x:Name="Shift" />
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Surface2Brush}" />
-                            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource SelectedNavBrush}" />
                             <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="Pill" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2" />
+                                        <DoubleAnimation Storyboard.TargetName="Hover" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.15" />
+                                        <DoubleAnimation Storyboard.TargetName="Shift" Storyboard.TargetProperty="X" To="4" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut" /></DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Hover" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2" />
+                                        <DoubleAnimation Storyboard.TargetName="Shift" Storyboard.TargetProperty="X" To="0" Duration="0:0:0.25">
+                                            <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut" /></DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Sel" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.25" />
+                                        <DoubleAnimation Storyboard.TargetName="Pill" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.15" />
+                                        <DoubleAnimation Storyboard.TargetName="PillScale" Storyboard.TargetProperty="ScaleY" From="0.2" To="1" Duration="0:0:0.5">
+                                            <DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.7" /></DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Sel" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2" />
                                         <DoubleAnimation Storyboard.TargetName="Pill" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2" />
+                                        <DoubleAnimation Storyboard.TargetName="PillScale" Storyboard.TargetProperty="ScaleY" To="0.2" Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>

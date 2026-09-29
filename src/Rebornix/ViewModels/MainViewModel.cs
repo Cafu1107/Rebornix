@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Rebornix.Helpers;
@@ -7,7 +9,26 @@ using Rebornix.Services;
 
 namespace Rebornix.ViewModels;
 
-public sealed record NavItem(string Key, string Title, string Glyph);
+/// <summary>Sol menü öğesi. Her sayfanın kendi rengi vardır (ikon kutucuğu ve seçili hali).</summary>
+public sealed record NavItem(string Key, string Title, string Glyph, string Hex)
+{
+    private static Color C(string hex) => (Color)ColorConverter.ConvertFromString(hex);
+
+    private static T Freeze<T>(T f) where T : Freezable
+    {
+        f.Freeze();
+        return f;
+    }
+
+    /// <summary>İkon rengi.</summary>
+    public Brush Accent { get; } = Freeze(new SolidColorBrush(C(Hex)));
+
+    /// <summary>Seçili değilken ikon kutucuğunun yarı saydam zemini.</summary>
+    public Brush Tint { get; } = Freeze(new SolidColorBrush(Color.FromArgb(0x26, C(Hex).R, C(Hex).G, C(Hex).B)));
+
+    /// <summary>Seçiliyken kutucuğu dolduran gradyan (sayfa rengi → marka indigosu).</summary>
+    public Brush Gradient { get; } = Freeze(new LinearGradientBrush(C(Hex), Color.FromRgb(0x63, 0x66, 0xF1), 45));
+}
 
 public sealed partial class MainViewModel : ObservableObject
 {
@@ -37,15 +58,15 @@ public sealed partial class MainViewModel : ObservableObject
 
         NavItems =
         [
-            new("home", Loc.Get("Nav_Home"), ""),
-            new("backup", Loc.Get("Nav_Backup"), ""),
-            new("restore", Loc.Get("Nav_Restore"), ""),
-            new("catalog", Loc.Get("Nav_Catalog"), ""),
-            new("drivers", Loc.Get("Nav_Drivers"), ""),
-            new("wifi", Loc.Get("Nav_Wifi"), ""),
-            new("winsettings", Loc.Get("Nav_WinSettings"), ""),
-            new("settings", Loc.Get("Nav_Settings"), ""),
-            new("logs", Loc.Get("Nav_Logs"), "")
+            new("home", Loc.Get("Nav_Home"), "", "#A78BFA"),
+            new("backup", Loc.Get("Nav_Backup"), "", "#60A5FA"),
+            new("restore", Loc.Get("Nav_Restore"), "", "#34D399"),
+            new("catalog", Loc.Get("Nav_Catalog"), "", "#F472B6"),
+            new("drivers", Loc.Get("Nav_Drivers"), "", "#FBBF24"),
+            new("wifi", Loc.Get("Nav_Wifi"), "", "#22D3EE"),
+            new("winsettings", Loc.Get("Nav_WinSettings"), "", "#818CF8"),
+            new("settings", Loc.Get("Nav_Settings"), "", "#94A3B8"),
+            new("logs", Loc.Get("Nav_Logs"), "", "#FB923C")
         ];
         _selectedNav = NavItems[0];
         _currentPage = Home;
