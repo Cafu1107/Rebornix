@@ -1,0 +1,15 @@
+name: 💡 Öneri
+description: Yeni bir özellik veya kataloğa eklenmesini istediğin bir program
+labels: [enhancement]
+body:
+  - type: textarea
+    id: oneri
+    attributes:
+      label: Ne istiyorsun?
+    validations:
+      required: true
+  - type: input
+    id: winget
+    attributes:
+      label: winget kimliği (program önerisiyse)
+      placeholder: VideoLAN.VLC

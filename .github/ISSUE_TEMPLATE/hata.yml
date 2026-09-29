@@ -1,0 +1,31 @@
+name: 🐞 Hata bildir
+description: Rebornix beklendiği gibi çalışmadı
+labels: [bug]
+body:
+  - type: textarea
+    id: ne-oldu
+    attributes:
+      label: Ne oldu?
+      description: Hangi düğmeye bastın, ne bekliyordun, ne oldu?
+    validations:
+      required: true
+  - type: input
+    id: surum
+    attributes:
+      label: Rebornix sürümü
+      placeholder: v1.3.0
+    validations:
+      required: true
+  - type: dropdown
+    id: windows
+    attributes:
+      label: Windows sürümü
+      options: [Windows 11, Windows 10]
+    validations:
+      required: true
+  - type: textarea
+    id: gunluk
+    attributes:
+      label: Günlük (log)
+      description: Varsa hata penceresindeki metni veya günlük dosyasını buraya yapıştır. Wi-Fi şifresi gibi kişisel bilgileri silmeyi unutma.
+      render: text

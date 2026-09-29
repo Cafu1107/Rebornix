@@ -4,6 +4,7 @@
 
 <p align="center">
   <a href="https://github.com/Cafu1107/Rebornix/releases/latest"><img src="https://img.shields.io/github/v/release/Cafu1107/Rebornix?style=for-the-badge&color=7C5CFF&label=S%C3%BCr%C3%BCm" alt="Sürüm"></a>
+  <a href="https://github.com/Cafu1107/Rebornix/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Cafu1107/Rebornix/ci.yml?branch=main&style=for-the-badge&label=Testler" alt="Testler"></a>
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-5AA9FF?style=for-the-badge&logo=windows&logoColor=white" alt="Windows 10 | 11">
   <img src="https://img.shields.io/badge/Kurulum-gerekmez-3DDC97?style=for-the-badge" alt="Kurulum gerekmez">
   <img src="https://img.shields.io/badge/Dil-T%C3%BCrk%C3%A7e-FF5C7A?style=for-the-badge" alt="Türkçe">
@@ -204,6 +205,7 @@ Ana Sayfa'nın sağ üstündeki **"Nasıl kullanılır?"** düğmesine bas.
 - 🛟 Windows ayarlarını geri yüklemeden önce mevcut ayarların otomatik kopyalanır; **Windows Ayarları → Geri alma noktaları**'ndan tek tıkla eski haline dönebilirsin.
 - ✋ Sürücü yükleme, ayar değiştirme gibi her önemli adımdan önce onay ister ve **Sistem Geri Yükleme noktası** oluşturmayı önerir.
 - 🧳 Taşınabilir: kendi ayarlarını sadece kendi klasöründe tutar.
+- 🧾 Her sürümde `Rebornix.exe.sha256` dosyası var. İndirdiğin dosyanın değiştirilmediğini PowerShell'de `Get-FileHash Rebornix.exe` yazıp çıkan değeri bu dosyadakiyle karşılaştırarak kontrol edebilirsin. Exe, GitHub Actions tarafından açık kaynak koddan derlenir.
 
 <details>
 <summary><b>Teknik ayrıntılar: hangi Windows ayarları yedekleniyor?</b></summary>
@@ -242,6 +244,8 @@ dotnet publish src/Rebornix/Rebornix.csproj -c Release -r win-x64 --self-contain
 ```json
 { "name": "VLC Media Player", "id": "VideoLAN.VLC", "category": "Müzik ve Medya", "description": "Medya oynatıcı.", "default": false }
 ```
+
+**Yeni sürüm çıkarmak:** `Rebornix.csproj` içindeki `<Version>` değerini artır, sonra `git tag v1.4.0 && git push origin v1.4.0`. GitHub Actions exe'yi derleyip SHA256 özetiyle birlikte sürüme yükler.
 
 Ludusavi entegrasyon testleri için `RBX_LUDUSAVI_EXE` ortam değişkeni gerekir. İkon: `tools/make-icon.ps1`.
 </details>
