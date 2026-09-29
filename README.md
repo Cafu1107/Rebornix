@@ -1,190 +1,225 @@
 <p align="center">
-  <img src="docs/banner.svg" alt="Rebornix — formattan önce yedekle, sonra tek tıkla geri kur" width="100%">
+  <img src="docs/banner.svg" alt="Rebornix: formattan önce yedekle, sonra tek tıkla geri kur" width="100%">
 </p>
 
 <p align="center">
   <a href="https://github.com/Cafu1107/Rebornix/releases/latest"><img src="https://img.shields.io/github/v/release/Cafu1107/Rebornix?style=for-the-badge&color=7C5CFF&label=S%C3%BCr%C3%BCm" alt="Sürüm"></a>
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-5AA9FF?style=for-the-badge&logo=windows&logoColor=white" alt="Windows 10 | 11">
-  <img src="https://img.shields.io/badge/.NET-8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 8">
   <img src="https://img.shields.io/badge/Kurulum-gerekmez-3DDC97?style=for-the-badge" alt="Kurulum gerekmez">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/Lisans-MIT-FFB547?style=for-the-badge" alt="MIT"></a>
+  <img src="https://img.shields.io/badge/Dil-T%C3%BCrk%C3%A7e-FF5C7A?style=for-the-badge" alt="Türkçe">
 </p>
 
+<h3 align="center">Bilgisayarına format atacaksan, önce Rebornix'i çalıştır.</h3>
+
 <p align="center">
-  <b>Format atmak artık bir günlük iş değil.</b><br>
-  Rebornix sürücülerini, Wi-Fi şifrelerini, uygulamalarını, oyun kayıtlarını ve Windows ayarlarını formattan önce yedekler;<br>
-  formattan sonra hepsini <b>doğru sırayla</b> geri kurar. Tek bir <code>.exe</code>, kurulum yok, tamamen Türkçe.
+  Sürücülerini, Wi-Fi şifrelerini, programlarını, oyun kayıtlarını ve Windows ayarlarını <b>formattan önce</b> kaydeder.<br>
+  Format bitince hepsini <b>tek tek, doğru sırayla</b> geri kurar. Sen sadece düğmelere basarsın.
 </p>
+
+<br>
+
+## 🟣 Şu an ne yapmalıyım? (3 adım)
+
+> **Kısaca:** Aşağıdaki mor düğmeden **tek bir dosya** indireceksin: `Rebornix.exe`. Kurulum yok; indirdiğin dosya programın kendisi.
 
 <p align="center">
   <a href="https://github.com/Cafu1107/Rebornix/releases/latest/download/Rebornix.exe">
-    <img src="https://img.shields.io/badge/%E2%AC%87%20Rebornix.exe%20indir-7C5CFF?style=for-the-badge" alt="İndir" height="42">
+    <img src="https://img.shields.io/badge/%E2%AC%87%EF%B8%8F%20%20Rebornix.exe%20%C4%B0ND%C4%B0R%20%20(~64%20MB)-7C5CFF?style=for-the-badge" alt="Rebornix.exe İndir" height="54">
   </a>
 </p>
 
+### 1️⃣ İndir
+
+Yukarıdaki **"Rebornix.exe İNDİR"** düğmesine tıkla. Dosya İndirilenler klasörüne iner.
+
+> ⚠️ Sürüm sayfasında **"Source code (zip)"** ve **"Source code (tar.gz)"** adlı dosyalar da görürsün. **Bunları indirme**, onlar yazılımcılar için. Sana lazım olan sadece **`Rebornix.exe`**.
+
+### 2️⃣ Doğru yere koy
+
+`Rebornix.exe` dosyasını **format atılmayacak bir yere** taşı:
+
+| ✅ Buraya koy | ❌ Buraya koyma |
+|---|---|
+| İkinci disk (ör. **D:**) | **C:** diski (Masaüstü, Belgeler, İndirilenler dahil) |
+| Harici disk | Format atınca her şey silinir, yedeğin de gider! |
+| USB bellek (en az 16 GB önerilir) | |
+
+> 💡 Örnek: `D:` diskinde **Rebornix** adında bir klasör aç, `Rebornix.exe`'yi içine koy.
+
+### 3️⃣ Çift tıkla ve rehberi takip et
+
+Çalıştırınca Windows iki şey sorabilir, ikisi de normal:
+
+1. **Mavi bir pencere çıkarsa** (*"Windows kişisel bilgisayarınızı korudu"*): **"Ek bilgi"** yazısına tıkla, sonra **"Yine de çalıştır"**'a bas.
+   <sub>Program yeni ve dijital imzası olmadığı için Windows tanımıyor; bu bir virüs uyarısı değil.</sub>
+2. **"Bu uygulamanın cihazınızda değişiklik yapmasına izin veriyor musunuz?"** sorusuna **Evet** de.
+   <sub>Sürücüleri ve Wi-Fi ayarlarını okuyabilmesi için yönetici izni gerekiyor.</sub>
+
+Program açılınca **adım adım bir rehber** çıkar ve sana ne yapman gerektiğini sayfa sayfa anlatır. 🎉
+
 <p align="center">
-  <img src="docs/screenshots/home.png" alt="Rebornix ana sayfa" width="88%">
+  <img src="docs/screenshots/guide_1.png" alt="Açılış rehberi" width="80%">
 </p>
 
 ---
 
-## ✨ Neler yapıyor?
+## 🗓️ Format sürecinin tamamı
 
-<table>
-  <tr>
-    <td width="33%" valign="top">
-      <h3>💾 Yedekle</h3>
-      <sub>Format ÖNCESİ</sub><br><br>
-      Sürücüler · Wi-Fi şifreleri (parolayla şifreli) · kurulu uygulama listesi · oyun kayıtları · Windows ayarları — hepsi ikinci diske, tek klasöre.
-    </td>
-    <td width="33%" valign="top">
-      <h3>♻️ Geri Yükle</h3>
-      <sub>Format SONRASI</sub><br><br>
-      <b>Sürücüler → Wi-Fi → Uygulamalar → Save'ler → Ayarlar.</b> Canlı durum, yeniden başlatmadan sonra kaldığı yerden devam, hatalıları tekrar dene.
-    </td>
-    <td width="33%" valign="top">
-      <h3>📦 Klasik Kurulum</h3>
-      <sub>Temiz bilgisayar</sub><br><br>
-      Chrome, Steam, Discord, Spotify, VS Code… 60 popüler uygulamayı kartlardan seç, tek tıkla sessizce kur. Profil kaydet, tekrar kullan.
-    </td>
-  </tr>
-</table>
+```
+   FORMATTAN ÖNCE                    FORMAT                     FORMATTAN SONRA
+┌──────────────────────┐      ┌──────────────────┐      ┌──────────────────────────┐
+│ Rebornix → Yedekle   │ ───▶ │ Windows'u kur    │ ───▶ │ Rebornix → Geri Yükle    │
+│ + kişisel dosyaların │      │ (C: silinir)     │      │ 1 Sürücü → 2 Wi-Fi →     │
+│   kendin kopyala     │      │                  │      │ 3 Uygulama → 4 Save →    │
+└──────────────────────┘      └──────────────────┘      │ 5 Ayarlar                │
+                                                        └──────────────────────────┘
+```
 
-| | |
+### 🅰️ Formattan ÖNCE
+
+**1. Rebornix'te "Yedekle" sayfasını aç:**
+
+| Ne yapacaksın | Neden |
 |---|---|
-| 🧭 **Adım adım rehber** | Uygulama ilk açıldığında formattan önce ve sonra ne yapman gerektiğini sayfa sayfa anlatır. |
-| 🔐 **Güvenli Wi-Fi yedeği** | AES-256-GCM + PBKDF2 (600.000 tur). Şifreler hiçbir log'a yazılmaz, geçici dosyalar sıfırlanıp silinir. |
-| 🛟 **Geri alınabilir** | Ayar geri yüklemeden önce otomatik anlık görüntü; tek tıkla eski haline dön. Sistem geri yükleme noktası önerisi. |
-| 🧪 **Deneme modu** | Hiçbir şeyi değiştirmeden ne yapılacağını gösterir. |
-| 🎮 **Oyun kayıtları** | [Ludusavi](https://github.com/mtkennerly/ludusavi) ile 10.000+ oyunun save'leri; kullanıcı adın değişse bile doğru yere döner. |
-| 🧳 **Taşınabilir** | Ayarlar ve loglar exe'nin yanında. AppData'ya ve kayıt defterine kendi ayarını yazmaz. |
+| **Yedek hedefi** olarak ikinci diski / USB'yi seç | Yedek oraya, `Rebornix` klasörüne yazılır |
+| **Sürücüler** açık kalsın | Format sonrası internete bağlanabilmek için ağ sürücüsü şart |
+| **Wi-Fi şifreleri**'ni istersen aç ve bir parola belirle | Wi-Fi şifrelerin kaydedilir. **Parolayı unutma!** |
+| **Uygulama listesi** açık kalsın | Hangi programların kurulu olduğu kaydedilir, sonra otomatik kurulur |
+| **Oyunları tara**'ya bas | Oyun kayıtların (save) bulunur ve kopyalanır |
+| **Yedeklemeyi başlat** | Sonunda çıkan özette "Hata yok ✓" yazdığını kontrol et |
+
+<p align="center"><img src="docs/screenshots/backup.png" alt="Yedekle sayfası" width="80%"></p>
+
+**2. Bunları KENDİN kopyala** (Rebornix bunlara dokunmaz):
+
+- [ ] 📁 **Kişisel dosyaların**: Masaüstü, Belgeler, Resimler, Videolar, Müzik, İndirilenler → ikinci diske/harici diske sürükle-bırak
+- [ ] 🌐 **Tarayıcı**: Chrome / Edge / Firefox'ta hesabına giriş yap ve **senkronizasyonu aç** (şifreler ve yer imleri böyle geri gelir)
+- [ ] 🔑 **Şifreler**: önemli hesaplarının şifrelerini ve Authenticator (iki adımlı doğrulama) yedek kodlarını bildiğinden emin ol
+- [ ] 🧾 **Lisanslar**: Office ve ücretli programların lisans anahtarlarını not et
+- [ ] 🔒 **BitLocker** kullanıyorsan kurtarma anahtarını kaydet
+
+**3. Yedek klasörünü kontrol et.** `D:\Rebornix` gibi klasörde **Rebornix.exe, Drivers, WiFi, Data, Backups** görüyorsan hazırsın. ✅
+
+### 🅱️ Format sırasında
+
+Windows'u kur. Kurulumda **sadece C: diskini** biçimlendir; yedeğin olduğu diske dokunma. Harici disk kullandıysan formattan önce çıkarmak en güvenlisi.
+
+### 🅲 Formattan SONRA
+
+1. Yedek diskini tak (veya D:'yi aç), **`Rebornix\Rebornix.exe`**'yi çift tıkla.
+2. **Geri Yükle** sayfasına geç. Yedeğin **otomatik bulunur**.
+3. **"Tümünü sırayla çalıştır"**'a bas (veya adımları tek tek çalıştır):
+
+| Sıra | Adım | Bilmen gereken |
+|:---:|---|---|
+| 1 | 🔧 **Sürücüler** | İlk iş budur. Bilgisayar yeniden başlatma isterse başlat, Rebornix'i tekrar aç; **kaldığı yerden devam eder**. |
+| 2 | 📶 **Wi-Fi** | Yedeklerken belirlediğin parolayı sorar, ağlarını ekler, interneti kontrol eder. |
+| 3 | 📦 **Uygulamalar** | Programların internetten tek tek, sessizce kurulur. Biraz sürebilir, çayını al. ☕ |
+| 4 | 🎮 **Oyun kayıtları** | Steam gibi platformlara giriş yaptıktan sonra çalıştırman en iyisi. |
+| 5 | 🎨 **Windows ayarları** | Temanı, duvar kağıdını, görev çubuğunu geri getirir. Beğenmezsen geri alabilirsin. |
+
+<p align="center"><img src="docs/screenshots/restore.png" alt="Geri Yükle sayfası" width="80%"></p>
+
+4. Sayfanın en altına bak:
+   - **Hatalıları tekrar dene**: kurulamayan bir şey olduysa
+   - **Elle kurulması gerekenler**: Rebornix'in otomatik kuramadığı programlar; bunları üreticisinin sitesinden indir
+5. Son olarak **Windows Update**'i çalıştır ve ekran kartı sürücüsünü üreticinin sitesinden (NVIDIA / AMD / Intel) güncelle.
+
+### ➕ Sadece program kurmak istiyorsan
+
+**Klasik Kurulum** sayfasını aç, istediğin programların kartlarına tıkla (Chrome, Steam, Discord, Spotify, VLC… 60 program), **Seçilenleri kur**'a bas. Bilgisayarda zaten olanlar **"Kurulu"** yazar ve atlanır.
+
+<p align="center"><img src="docs/screenshots/catalog.png" alt="Klasik Kurulum" width="80%"></p>
 
 ---
 
-## 🖼️ Ekran görüntüleri
+## ❓ Sık sorulan sorular
 
-<table>
-  <tr>
-    <td><img src="docs/screenshots/guide_3.png" alt="Rehber: format öncesi"></td>
-    <td><img src="docs/screenshots/guide_5.png" alt="Rehber: format sonrası"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Açılış rehberi — format öncesi</sub></td>
-    <td align="center"><sub>Açılış rehberi — format sonrası</sub></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/backup.png" alt="Yedekle"></td>
-    <td><img src="docs/screenshots/restore.png" alt="Geri Yükle"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Yedekle</sub></td>
-    <td align="center"><sub>Geri Yükle</sub></td>
-  </tr>
-  <tr>
-    <td><img src="docs/screenshots/catalog.png" alt="Klasik Kurulum"></td>
-    <td><img src="docs/screenshots/winsettings.png" alt="Windows Ayarları"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Klasik Kurulum</sub></td>
-    <td align="center"><sub>Windows Ayarları</sub></td>
-  </tr>
-</table>
+<details>
+<summary><b>.NET veya başka bir şey kurmam gerekiyor mu?</b></summary>
 
----
+Hayır. `Rebornix.exe` her şeyi içinde taşır. Temiz kurulmuş Windows 10/11'de (64 bit) direkt çalışır.
+</details>
 
-## 🚀 Nasıl kullanılır?
+<details>
+<summary><b>Windows "bilgisayarınızı korudu" diyor ya da antivirüs uyarı veriyor</b></summary>
 
-### 0. Hazırlık
-1. [`Rebornix.exe`](https://github.com/Cafu1107/Rebornix/releases/latest)'yi indir ve **ikinci diske** (ör. `D:\Rebornix\`), harici diske veya USB belleğe koy. **C: diskine koyma** — format atınca silinir.
-2. Çift tıkla, yönetici iznine **Evet** de. İlk açılışta rehber seni adım adım yönlendirir.
-3. İlk denemede **Ayarlar → Deneme modu**'nu açabilirsin.
+Program yeni ve ücretli bir dijital imzası olmadığı için Windows onu tanımıyor. **"Ek bilgi" → "Yine de çalıştır"** diyebilirsin. Kaynak kodun tamamı bu sayfada açık; istersen kendin inceleyebilir veya derleyebilirsin.
+</details>
 
-### 1. Format ÖNCESİ — Yedekle
-1. **Yedek hedefi**: ikinci diski seç (yedek `X:\Rebornix\` klasörüne yazılır, uygulama da oraya kopyalanır).
-2. **Sürücüler** açık kalsın — ağ/Wi-Fi sürücüleri *"Kritik"* işaretlidir, format sonrası internet için şarttır.
-3. **Wi-Fi şifreleri** — istersen aç, bir parola belirle (**unutma!**).
-4. **Uygulama listesi** açık kalsın.
-5. **Oyunları tara**, istemediklerini çıkar; gerekirse **özel klasör** ekle.
-6. **Windows ayarları**nı seç → **Yedeklemeyi başlat** → özette hata olmadığını kontrol et.
+<details>
+<summary><b>Önce denemek istiyorum, bir şeyi bozar mı?</b></summary>
 
-> **Rebornix'in yedeklemediklerini sen yedekle:**
-> - 📁 Masaüstü, Belgeler, Resimler, Videolar, Müzik, İndirilenler
-> - 🌐 Tarayıcı şifreleri/yer imleri → tarayıcı hesabına giriş yapıp senkronizasyonu aç
-> - 🔑 Authenticator yedek kodları, lisans anahtarları, BitLocker kurtarma anahtarı
-> - 📨 Outlook `.pst` arşivleri, bulutta olmayan projeler
+**Ayarlar → Deneme modu**'nu aç. Bu modda Rebornix hiçbir şeyi değiştirmez, sadece ne yapacağını yazar. Ayrıca her önemli işlemden önce onay ister, hiçbir dosyanı kendiliğinden silmez.
+</details>
 
-### 2. Format SONRASI — Geri Yükle
-Yedek diskini tak, `Rebornix.exe`'yi aç, **Geri Yükle**'ye geç (yedek otomatik bulunur). Sırayla:
+<details>
+<summary><b>Yedeğim nerede duruyor?</b></summary>
 
-| # | Adım | Ne olur? |
-|---|---|---|
-| 1 | **Sürücüler** | Önce ağ sürücüleri, sonra diğerleri kurulur. Sistemde daha yeni sürüm varsa eskisi yazılmaz. Yeniden başlatma isterse başlat, Rebornix'i tekrar aç — kaldığı yerden devam eder. |
-| 2 | **Wi-Fi** | Parolanı gir; ağların eklenir, internet kontrol edilir. |
-| 3 | **Uygulamalar** | winget ile tek tek sessiz kurulum; kurulu olanlar atlanır. |
-| 4 | **Save'ler** | Oyun platformlarına giriş yaptıktan sonra. Çakışmada *"Yeni olanı koru"* önerilir. |
-| 5 | **Windows ayarları** | Önce otomatik geri alma kopyası alınır. |
-
-Sonra: **Hatalıları tekrar dene**, *"Elle kurulması gerekenler"* listesine bak, Windows Update'i çalıştır, ekran kartı sürücüsünü üreticinin sitesinden güncelle.
-
-### 3. Klasik Kurulum
-Kartlardan seç → **Seçilenleri kur**. Kurulu olanlar *"Kurulu"* rozetiyle atlanır. Seçimini **profil** olarak kaydedebilirsin (ör. *Oyun PC'si*, *Minimal*).
-
----
-
-## 🗂️ Klasör yapısı
+Seçtiğin diskte `Rebornix` klasöründe:
 
 ```
-Rebornix.exe
-Drivers\           sürücü yedekleri (kategori klasörleri + drivers.json)
-WiFi\              wifi.rbxenc (parolayla şifreli)
-Data\              katalog.json, profiller.json, winget_apps.json, elle_kurulacaklar.json ...
-Backups\           Ludusavi save yedekleri + özel klasörler
-WindowsSettings\   ayar yedeği + _GeriAlma anlık görüntüleri
-Logs\              Rebornix_YYYY-AA-GG.log
-Tools\             ludusavi.exe (otomatik indirilir)
+Rebornix.exe        ← program (format sonrası bunu aç)
+Drivers\            sürücüler
+WiFi\wifi.rbxenc    şifreli Wi-Fi yedeği
+Data\               uygulama listesi, ayarlar
+Backups\            oyun kayıtları
+WindowsSettings\    Windows ayarları
+Logs\               işlem kayıtları
 ```
+</details>
 
-## ➕ Kataloğa uygulama eklemek (kod gerekmez)
+<details>
+<summary><b>Wi-Fi yedeği parolasını unuttum</b></summary>
 
-`winget search <ad>` ile kimliği bul, `Data\katalog.json` içindeki `apps` listesine ekle:
+Maalesef yedek açılamaz; bu, başkası diskini alırsa şifrelerini okuyamasın diye bilinçli bir güvenlik önlemi. Wi-Fi ağlarına elle bağlanman gerekir. Diğer adımlar etkilenmez.
+</details>
 
-```json
-{ "name": "VLC Media Player", "id": "VideoLAN.VLC", "category": "Müzik ve Medya", "description": "Medya oynatıcı.", "default": false }
-```
+<details>
+<summary><b>Tarayıcı şifrelerimi neden yedeklemiyor?</b></summary>
 
-Kategoriler: `Tarayıcılar`, `Oyun`, `Müzik ve Medya`, `İletişim`, `Geliştirme`, `Araçlar`, `Güvenlik`, `Ofis`. Microsoft Store uygulamaları için `"source": "msstore"` ekle.
+Güvenlik nedeniyle. En güvenli yol, tarayıcında hesabına giriş yapıp senkronizasyonu açmak; format sonrası tekrar giriş yapınca her şey geri gelir.
+</details>
+
+<details>
+<summary><b>Rehberi tekrar görmek istiyorum</b></summary>
+
+Ana Sayfa'nın sağ üstündeki **"Nasıl kullanılır?"** düğmesine bas.
+</details>
 
 ---
 
 ## 🛡️ Güvenlik
 
-- Yıkıcı her işlemden önce onay istenir; kullanıcı verisi kendiliğinden silinmez. Eski yedek silinmez, `_OncekiYedek_TARİH` klasörüne taşınır.
-- Wi-Fi yedeği: AES-256-GCM, PBKDF2-HMAC-SHA256 600.000 tur, rastgele salt/nonce, başlık doğrulamalı. Yedek geri açılıp doğrulanmadan düz metin dosyalar silinmez; hata/iptalde bile temizlenir.
-- Windows ayarları: yalnızca **HKCU** altında, kodda tek tek listelenmiş değerler. HKLM'ye dokunulmaz.
-- Yol birleştirmede `..\` kaçışları engellenir; winget kimlikleri doğrulanır.
+- 🔐 Wi-Fi şifreleri **AES-256** ile, senin parolanla şifrelenir. Parolan hiçbir yere kaydedilmez, şifreler log dosyalarına yazılmaz.
+- 🛟 Windows ayarlarını geri yüklemeden önce mevcut ayarların otomatik kopyalanır; **Windows Ayarları → Geri alma noktaları**'ndan tek tıkla eski haline dönebilirsin.
+- ✋ Sürücü yükleme, ayar değiştirme gibi her önemli adımdan önce onay ister ve **Sistem Geri Yükleme noktası** oluşturmayı önerir.
+- 🧳 Taşınabilir: kendi ayarlarını sadece kendi klasöründe tutar.
 
 <details>
-<summary><b>Windows ayarları: dahil edilen ve edilmeyen kalemler</b></summary>
+<summary><b>Teknik ayrıntılar: hangi Windows ayarları yedekleniyor?</b></summary>
 
-**Dahil:** Tema ve vurgu rengi · Masaüstü arka planı (resim dahil) · Görev çubuğu · Dosya Gezgini · Fare ve klavye · Bölge ve saat biçimi (bölge aynıysa) · Kullanıcı ortam değişkenleri (PATH birleştirilir, üzerine yazılmaz)
+**Yedeklenenler:** Tema ve vurgu rengi · Masaüstü arka planı · Görev çubuğu · Dosya Gezgini · Fare ve klavye · Bölge ve saat biçimi · Kullanıcı ortam değişkenleri (PATH birleştirilir, üzerine yazılmaz). Sadece kullanıcı hesabına ait (HKCU) ve tek tek belirlenmiş değerler okunur/yazılır.
 
-| Eklenmeyen | Sebep |
+| Bilerek yedeklenmeyen | Sebep |
 |---|---|
-| Varsayılan uygulamalar | DISM içe aktarma yalnızca yeni kullanıcıları etkiler; mevcut seçimler hash korumalı |
-| Güç planları | Sistem geneli, yeni plan kimliği; Modern Standby'da desteklenmez |
+| Varsayılan uygulamalar | Windows mevcut kullanıcının seçimlerini koruma altında tutuyor, güvenilir geri yüklenemiyor |
+| Güç planları | Sistem geneli, bazı cihazlarda desteklenmiyor |
 | Dil / klavye düzenleri | Dil paketi indirmesi gerektirebilir |
-| Widgets düğmesi | Windows 11 UCPD koruması |
-| Sabitlenmiş uygulamalar | Belgelenmemiş, sürüme bağlı veri |
+| Widgets düğmesi | Windows 11 bu ayarı kilitliyor |
+| Sabitlenmiş uygulamalar | Başlat menüsünü bozabilir |
 | İmleç teması | İmleç dosyaları eksik olabilir |
 | Saat dilimi | Windows otomatik ayarlıyor |
 
+Wi-Fi şifreleme: AES-256-GCM, PBKDF2-HMAC-SHA256 (600.000 tur), rastgele salt ve nonce. Geçici düz metin dosyalar yedek doğrulandıktan sonra sıfırlanıp silinir.
 </details>
 
 ---
 
-## 🛠️ Geliştiriciler için
+<details>
+<summary><b>🛠️ Yazılımcılar için</b></summary>
 
-C# 12 · .NET 8 · WPF · MVVM ([CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)) · metinler `src/Rebornix/Resources/Strings.resx` (İngilizce için `Strings.en.resx` eklenebilir).
+C# 12 · .NET 8 · WPF · MVVM ([CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)). Arayüz metinleri `src/Rebornix/Resources/Strings.resx` dosyasında (İngilizce için `Strings.en.resx` eklenebilir).
 
 ```bash
 dotnet build
@@ -193,10 +228,17 @@ dotnet publish src/Rebornix/Rebornix.csproj -c Release -r win-x64 --self-contain
   -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
 ```
 
-Ludusavi entegrasyon testleri için `RBX_LUDUSAVI_EXE` ortam değişkenini ayarla. İkon: `tools/make-icon.ps1`.
+**Kataloğa program eklemek:** `winget search <ad>` ile kimliği bul, `Data\katalog.json` içindeki `apps` listesine ekle (kod gerekmez):
+
+```json
+{ "name": "VLC Media Player", "id": "VideoLAN.VLC", "category": "Müzik ve Medya", "description": "Medya oynatıcı.", "default": false }
+```
+
+Ludusavi entegrasyon testleri için `RBX_LUDUSAVI_EXE` ortam değişkeni gerekir. İkon: `tools/make-icon.ps1`.
+</details>
 
 ## 🙏 Teşekkürler
 
-[winget](https://github.com/microsoft/winget-cli) · [Ludusavi](https://github.com/mtkennerly/ludusavi) (MIT, çalışma anında indirilir) · [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)
+[winget](https://github.com/microsoft/winget-cli) (program kurulumu) · [Ludusavi](https://github.com/mtkennerly/ludusavi) (oyun kayıtları, otomatik indirilir) · [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)
 
 <p align="center"><sub>MIT Lisansı · Cafu1107</sub></p>
