@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0E1016"/>
+      <stop offset="1" stop-color="#191D29"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7C5CFF"/>
+      <stop offset="1" stop-color="#5AA9FF"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7C5CFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#7C5CFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#5AA9FF" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#5AA9FF" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#FFFFFF" stroke-opacity="0.04"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="400" rx="28" fill="url(#bg)"/>
+  <rect width="1280" height="400" rx="28" fill="url(#grid)"/>
+  <circle cx="250" cy="120" r="260" fill="url(#glow1)"/>
+  <circle cx="1120" cy="360" r="300" fill="url(#glow2)"/>
+
+  <!-- Logo -->
+  <g transform="translate(120,110) scale(2.8)">
+    <rect width="64" height="64" rx="16" fill="url(#accent)"/>
+    <path d="M 32,14 A 18,18 0 1 1 15.4,25.1" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 8,22 L 20,14 L 21,28 Z" fill="#FFF"/>
+    <rect x="25" y="27" width="14" height="12" rx="3" fill="#FFF"/>
+  </g>
+
+  <text x="345" y="185" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="92" font-weight="800" fill="#FFFFFF" letter-spacing="-2">Rebornix</text>
+  <text x="349" y="238" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="30" fill="#C9CEDD">Formattan önce yedekle, sonra tek tıkla geri kur.</text>
+
+  <g font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" fill="#FFFFFF">
+    <rect x="349" y="276" width="140" height="40" rx="20" fill="#7C5CFF" fill-opacity="0.25" stroke="#7C5CFF" stroke-opacity="0.6"/>
+    <text x="419" y="302" text-anchor="middle">Sürücüler</text>
+    <rect x="501" y="276" width="110" height="40" rx="20" fill="#7C5CFF" fill-opacity="0.25" stroke="#7C5CFF" stroke-opacity="0.6"/>
+    <text x="556" y="302" text-anchor="middle">Wi-Fi</text>
+    <rect x="623" y="276" width="150" height="40" rx="20" fill="#7C5CFF" fill-opacity="0.25" stroke="#7C5CFF" stroke-opacity="0.6"/>
+    <text x="698" y="302" text-anchor="middle">Uygulamalar</text>
+    <rect x="785" y="276" width="150" height="40" rx="20" fill="#5AA9FF" fill-opacity="0.22" stroke="#5AA9FF" stroke-opacity="0.6"/>
+    <text x="860" y="302" text-anchor="middle">Oyun save'leri</text>
+    <rect x="947" y="276" width="190" height="40" rx="20" fill="#5AA9FF" fill-opacity="0.22" stroke="#5AA9FF" stroke-opacity="0.6"/>
+    <text x="1042" y="302" text-anchor="middle">Windows ayarları</text>
+  </g>
+</svg>

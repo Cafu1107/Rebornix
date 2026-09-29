@@ -1,0 +1,96 @@
+<UserControl x:Class="Rebornix.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:h="clr-namespace:Rebornix.Helpers"
+             xmlns:vm="clr-namespace:Rebornix.ViewModels"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:SettingsViewModel}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="32,28,32,28" MaxWidth="980" HorizontalAlignment="Left">
+            <TextBlock Text="{h:Loc Settings_Title}" Style="{StaticResource H1}" />
+            <TextBlock Text="{h:Loc Settings_Subtitle}" Style="{StaticResource Dim}" Margin="0,6,0,20" />
+
+            <Border Style="{StaticResource Card}">
+                <DockPanel>
+                    <CheckBox DockPanel.Dock="Right" Style="{StaticResource Switch}" IsChecked="{Binding DryRun}" VerticalAlignment="Center" />
+                    <StackPanel>
+                        <TextBlock Text="{h:Loc Settings_DryTitle}" Style="{StaticResource H3}" />
+                        <TextBlock Text="{h:Loc Settings_DryDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0">
+                <StackPanel>
+                    <DockPanel>
+                        <CheckBox DockPanel.Dock="Right" Style="{StaticResource Switch}" IsChecked="{Binding OfferRestorePoint}" VerticalAlignment="Center" />
+                        <StackPanel>
+                            <TextBlock Text="{h:Loc Settings_RpTitle}" Style="{StaticResource H3}" />
+                            <TextBlock Text="{h:Loc Settings_RpDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                        </StackPanel>
+                    </DockPanel>
+                    <Button Content="{h:Loc Settings_RpNow}" Command="{Binding CreateRestorePointCommand}" HorizontalAlignment="Left" Margin="0,12,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0">
+                <StackPanel>
+                    <TextBlock Text="{h:Loc Settings_ToolsTitle}" Style="{StaticResource H3}" />
+                    <Grid Margin="0,12,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="160" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="winget" Style="{StaticResource Body}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Text="{Binding WingetStatus}" Style="{StaticResource Dim}" VerticalAlignment="Center" />
+                        <Button Grid.Column="2" Content="{h:Loc Settings_WingetInstall}" Command="{Binding InstallWingetCommand}" />
+                        <TextBlock Grid.Row="1" Text="Ludusavi" Style="{StaticResource Body}" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,10,0,0" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding LudusaviStatus}" Style="{StaticResource Dim}" VerticalAlignment="Center" Margin="0,10,0,0" />
+                        <Button Grid.Row="1" Grid.Column="2" Content="{h:Loc Settings_LudusaviUpdate}" Command="{Binding UpdateLudusaviCommand}" Margin="0,10,0,0" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0">
+                <StackPanel>
+                    <TextBlock Text="{h:Loc Settings_FoldersTitle}" Style="{StaticResource H3}" />
+                    <TextBlock Text="{h:Loc Settings_FoldersDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                    <TextBlock Text="{Binding BaseDir}" FontFamily="{StaticResource MonoFont}" Foreground="{StaticResource TextBrush}" Margin="0,8,0,10" TextWrapping="Wrap" />
+                    <WrapPanel>
+                        <Button Content="{h:Loc Settings_OpenBase}" Command="{Binding OpenFolderCommand}" CommandParameter="base" Margin="0,0,8,6" />
+                        <Button Content="{h:Loc Settings_OpenData}" Command="{Binding OpenFolderCommand}" CommandParameter="data" Margin="0,0,8,6" />
+                        <Button Content="{h:Loc Settings_OpenLogs}" Command="{Binding OpenFolderCommand}" CommandParameter="logs" Margin="0,0,8,6" />
+                        <Button Content="{h:Loc Settings_OpenTools}" Command="{Binding OpenFolderCommand}" CommandParameter="tools" Margin="0,0,8,6" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0">
+                <DockPanel>
+                    <Button DockPanel.Dock="Right" Content="{h:Loc Home_Guide}" Command="{Binding ShowGuideCommand}" VerticalAlignment="Center" Margin="16,0,0,0" />
+                    <StackPanel>
+                        <TextBlock Text="{h:Loc Settings_GuideTitle}" Style="{StaticResource H3}" />
+                        <TextBlock Text="{h:Loc Settings_GuideDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0">
+                <StackPanel>
+                    <TextBlock Text="{h:Loc Settings_LanguageTitle}" Style="{StaticResource H3}" />
+                    <TextBlock Text="{h:Loc Settings_LanguageDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                </StackPanel>
+            </Border>
+
+            <TextBlock Style="{StaticResource Caption}" Margin="4,16,0,0">
+                <Run Text="Rebornix" /><Run Text=" v" /><Run Text="{Binding Version, Mode=OneWay}" /><Run Text=" · " /><Run Text="{h:Loc Settings_About}" />
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

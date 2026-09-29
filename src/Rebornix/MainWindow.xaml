@@ -1,0 +1,156 @@
+<Window x:Class="Rebornix.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:h="clr-namespace:Rebornix.Helpers"
+        xmlns:vm="clr-namespace:Rebornix.ViewModels"
+        xmlns:v="clr-namespace:Rebornix.Views"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:MainViewModel}"
+        Title="Rebornix" Width="1280" Height="820" MinWidth="1000" MinHeight="650"
+        WindowStartupLocation="CenterScreen" Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource TextBrush}" FontFamily="{StaticResource UiFont}"
+        Icon="pack://application:,,,/Assets/Rebornix.ico"
+        TextOptions.TextFormattingMode="Display" UseLayoutRounding="True">
+    <Grid Background="{StaticResource BgBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="232" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- ═══════════ Sol menü ═══════════ -->
+        <Border Background="{StaticResource SidebarBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
+            <DockPanel Margin="14,18,14,14">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="6,0,0,22">
+                    <Image Source="{StaticResource LogoImage}" Width="36" Height="36" />
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="Rebornix" FontSize="17" FontWeight="Bold" />
+                        <TextBlock Text="{h:Loc App_Tagline}" Style="{StaticResource Caption}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Bottom" Margin="4,10,4,0">
+                    <Border Style="{StaticResource Badge}" Background="{StaticResource WarningSoftBrush}" Margin="0,0,0,8"
+                            Visibility="{Binding IsDryRun, Converter={StaticResource BoolToVis}}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE7BA;" Style="{StaticResource Icon}" FontSize="12" Foreground="{StaticResource WarningBrush}" Margin="0,0,6,0" />
+                            <TextBlock Text="{h:Loc Dry_Chip}" Style="{StaticResource BadgeText}" Foreground="{StaticResource WarningBrush}" />
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Badge}" Background="{StaticResource DangerSoftBrush}" Margin="0,0,0,8"
+                            Visibility="{Binding IsAdmin, Converter={StaticResource InvBoolToVis}}">
+                        <TextBlock Text="{h:Loc Home_AdminMissingShort}" Style="{StaticResource BadgeText}" Foreground="{StaticResource DangerBrush}" />
+                    </Border>
+                </StackPanel>
+
+                <ListBox ItemsSource="{Binding NavItems}" SelectedItem="{Binding SelectedNav}" Style="{StaticResource NavList}"
+                         ItemContainerStyle="{StaticResource NavItem}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Glyph}" Style="{StaticResource Icon}" FontSize="16"
+                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" />
+                                <TextBlock Text="{Binding Title}" Margin="14,0,0,0" FontSize="14" VerticalAlignment="Center"
+                                           Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Border>
+
+        <!-- ═══════════ İçerik + alt panel ═══════════ -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ContentControl x:Name="PageHost" Content="{Binding CurrentPage, NotifyOnTargetUpdated=True}" Focusable="False">
+                <ContentControl.RenderTransform>
+                    <TranslateTransform x:Name="PageShift" />
+                </ContentControl.RenderTransform>
+                <ContentControl.Triggers>
+                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.25" />
+                                <DoubleAnimation Storyboard.TargetName="PageShift" Storyboard.TargetProperty="Y" From="14" To="0" Duration="0:0:0.28">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ContentControl.Triggers>
+            </ContentControl>
+
+            <!-- Alt panel: genel ilerleme + canlı log -->
+            <Border Grid.Row="1" Background="{StaticResource SidebarBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0">
+                <StackPanel>
+                    <Grid Margin="20,10,14,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <Grid Visibility="{Binding Operation.IsBusy, Converter={StaticResource BoolToVis}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Operation.Title}" FontWeight="SemiBold" Margin="0,0,12,0" />
+                                <TextBlock Grid.Column="1" Text="{Binding Operation.Status}" Style="{StaticResource Caption}"
+                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" VerticalAlignment="Center" />
+                            </Grid>
+                            <ProgressBar Margin="0,7,0,0" Value="{Binding Operation.Progress, Mode=OneWay}" Maximum="100"
+                                         IsIndeterminate="{Binding Operation.IsIndeterminate}"
+                                         Visibility="{Binding Operation.IsBusy, Converter={StaticResource BoolToVis}}" />
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding Operation.IsBusy, Converter={StaticResource InvBoolToVis}}">
+                                <TextBlock Text="&#xE73E;" Style="{StaticResource Icon}" FontSize="12" Foreground="{StaticResource SuccessBrush}" Margin="0,0,8,0" />
+                                <TextBlock Text="{Binding LastLog.Message, FallbackValue=''}" Style="{StaticResource Caption}"
+                                           TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Button Grid.Column="1" Content="{h:Loc Btn_Cancel}" Command="{Binding Operation.CancelCommand}" Margin="14,0,0,0"
+                                Visibility="{Binding Operation.IsBusy, Converter={StaticResource BoolToVis}}" />
+                        <Button Grid.Column="2" Style="{StaticResource GhostButton}" Command="{Binding ToggleLogPanelCommand}" Margin="8,0,0,0"
+                                ToolTip="{h:Loc Log_TogglePanel}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE9D9;" Style="{StaticResource Icon}" FontSize="13" Margin="0,0,8,0" />
+                                <TextBlock Text="{h:Loc Log_Panel}" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <ListBox x:Name="LogList" ItemsSource="{Binding LogEntries}" Height="150" Background="{StaticResource BgBrush}"
+                             BorderThickness="0,1,0,0" BorderBrush="{StaticResource BorderBrush}" Padding="14,6"
+                             ItemContainerStyle="{StaticResource PlainItem}"
+                             VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             Visibility="{Binding IsLogPanelOpen, Converter={StaticResource BoolToVis}}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding TimeText}" FontFamily="{StaticResource MonoFont}" FontSize="12" Foreground="{StaticResource TextDimBrush}" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Message}" FontFamily="{StaticResource MonoFont}" FontSize="12"
+                                               TextWrapping="Wrap" Foreground="{Binding Level, Converter={StaticResource LogBrush}}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- "Nasıl kullanılır?" tanıtımı (açılışta ve Ana Sayfa / Ayarlar'dan) -->
+        <v:OnboardingView Grid.ColumnSpan="2" DataContext="{Binding Onboarding}"
+                          Visibility="{Binding IsOpen, Converter={StaticResource BoolToVis}}" />
+    </Grid>
+</Window>

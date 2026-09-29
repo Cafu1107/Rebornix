@@ -1,0 +1,334 @@
+<UserControl x:Class="Rebornix.Views.RestoreView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:h="clr-namespace:Rebornix.Helpers"
+             xmlns:vm="clr-namespace:Rebornix.ViewModels"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance vm:RestoreViewModel}">
+    <UserControl.Resources>
+        <!-- Genel durum satırı -->
+        <DataTemplate x:Key="RowTemplate">
+            <Border Style="{StaticResource InnerCard}" Margin="0,3" Padding="12,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <CheckBox IsChecked="{Binding IsSelected}" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1" Margin="10,0">
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource Body}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
+                        <TextBlock Text="{Binding Detail}" Style="{StaticResource Caption}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                   Visibility="{Binding Detail, Converter={StaticResource BoolToVis}}" />
+                        <TextBlock Text="{Binding Message}" Style="{StaticResource Caption}" Foreground="{Binding Status, Converter={StaticResource StatusBrush}}"
+                                   Visibility="{Binding Message, Converter={StaticResource BoolToVis}}" />
+                    </StackPanel>
+                    <ContentPresenter Grid.Column="2" Content="{Binding Status}" ContentTemplate="{StaticResource StatusBadge}" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <Style x:Key="StepNumber" TargetType="Border">
+            <Setter Property="Width" Value="34" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="CornerRadius" Value="17" />
+            <Setter Property="Background" Value="{StaticResource AccentSoftBrush}" />
+            <Setter Property="Margin" Value="0,0,14,0" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style x:Key="StepNumberText" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Foreground" Value="{StaticResource AccentHoverBrush}" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="32,28,32,28">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Style="{StaticResource AccentButton}" Command="{Binding RunAllCommand}" Padding="22,11" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xE768;" Style="{StaticResource Icon}" Foreground="White" Margin="0,0,10,0" />
+                        <TextBlock Text="{h:Loc Restore_RunAll}" />
+                    </StackPanel>
+                </Button>
+                <StackPanel>
+                    <TextBlock Text="{h:Loc Restore_Title}" Style="{StaticResource H1}" />
+                    <TextBlock Text="{h:Loc Restore_Subtitle}" Style="{StaticResource Dim}" Margin="0,6,0,0" />
+                </StackPanel>
+            </DockPanel>
+
+            <!-- Yedek kaynağı -->
+            <Border Style="{StaticResource Card}" Margin="0,22,0,0">
+                <StackPanel>
+                    <TextBlock Text="{h:Loc Restore_SourceTitle}" Style="{StaticResource H3}" Margin="0,0,0,10" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ComboBox ItemsSource="{Binding Candidates}" SelectedItem="{Binding SelectedCandidate}" DisplayMemberPath="Display" />
+                        <Button Grid.Column="1" Content="{h:Loc Btn_Browse}" Command="{Binding BrowseBackupCommand}" Margin="10,0,0,0" />
+                        <Button Grid.Column="2" Content="{h:Loc Restore_SearchAgain}" Command="{Binding FindBackupsCommand}" Margin="10,0,0,0" />
+                    </Grid>
+                    <TextBlock Text="{Binding BackupInfo}" Style="{StaticResource Dim}" Margin="0,10,0,0" />
+                    <DockPanel Margin="0,8,0,0" Visibility="{Binding ResumeInfo, Converter={StaticResource BoolToVis}}">
+                        <Button DockPanel.Dock="Right" Content="{h:Loc Restore_ResetProgress}" Command="{Binding ResetProgressCommand}" Style="{StaticResource GhostButton}" />
+                        <TextBlock Text="{Binding ResumeInfo}" Style="{StaticResource Body}" Foreground="{StaticResource InfoBrush}" VerticalAlignment="Center" />
+                    </DockPanel>
+                    <Border Style="{StaticResource WarnBanner}" Margin="0,10,0,0" Visibility="{Binding RebootRequired, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="{h:Loc Restore_RebootNote}" Style="{StaticResource Body}" />
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <StackPanel IsEnabled="{Binding HasBackup}">
+
+                <!-- ADIM 1: Sürücüler -->
+                <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Left" Style="{StaticResource StepNumber}"><TextBlock Text="1" Style="{StaticResource StepNumberText}" /></Border>
+                        <StackPanel>
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                    <ContentPresenter Content="{Binding DriversState}" ContentTemplate="{StaticResource StatusBadge}" Margin="0,0,12,0" />
+                                    <CheckBox Style="{StaticResource Switch}" IsChecked="{Binding DoDrivers}" IsEnabled="{Binding HasDrivers}" Margin="0,0,12,0" />
+                                    <Button Content="{h:Loc Restore_RunStep}" Command="{Binding RunDriversCommand}" IsEnabled="{Binding HasDrivers}" />
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{h:Loc Restore_Step1Title}" Style="{StaticResource H3}" />
+                                    <TextBlock Text="{h:Loc Restore_Step1Desc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                                </StackPanel>
+                            </DockPanel>
+                            <TextBlock Text="{h:Loc Restore_NotInBackup}" Style="{StaticResource Caption}" Margin="0,8,0,0"
+                                       Visibility="{Binding HasDrivers, Converter={StaticResource InvBoolToVis}}" />
+                            <Border Margin="0,10,0,0" MaxHeight="280" Visibility="{Binding HasDrivers, Converter={StaticResource BoolToVis}}">
+                                <ListBox ItemsSource="{Binding DriverItems}" ItemTemplate="{StaticResource RowTemplate}" Background="Transparent" BorderThickness="0"
+                                         ItemContainerStyle="{StaticResource PlainItem}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                            </Border>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <!-- ADIM 2: Wi-Fi -->
+                <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Left" Style="{StaticResource StepNumber}"><TextBlock Text="2" Style="{StaticResource StepNumberText}" /></Border>
+                        <StackPanel>
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                    <ContentPresenter Content="{Binding WifiState}" ContentTemplate="{StaticResource StatusBadge}" Margin="0,0,12,0" />
+                                    <CheckBox Style="{StaticResource Switch}" IsChecked="{Binding DoWifi}" IsEnabled="{Binding HasWifi}" Margin="0,0,12,0" />
+                                    <Button Content="{h:Loc Restore_RunStep}" Command="{Binding RunWifiCommand}" IsEnabled="{Binding HasWifi}" />
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{h:Loc Restore_Step2Title}" Style="{StaticResource H3}" />
+                                    <TextBlock Text="{h:Loc Restore_Step2Desc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                                </StackPanel>
+                            </DockPanel>
+                            <TextBlock Text="{h:Loc Restore_NotInBackup}" Style="{StaticResource Caption}" Margin="0,8,0,0"
+                                       Visibility="{Binding HasWifi, Converter={StaticResource InvBoolToVis}}" />
+                            <StackPanel Visibility="{Binding HasWifi, Converter={StaticResource BoolToVis}}" Margin="0,10,0,0">
+                                <Button HorizontalAlignment="Left" Command="{Binding UnlockWifiCommand}"
+                                        Visibility="{Binding WifiUnlocked, Converter={StaticResource InvBoolToVis}}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xE785;" Style="{StaticResource Icon}" FontSize="13" Margin="0,0,8,0" />
+                                        <TextBlock Text="{h:Loc Restore_WifiUnlock}" />
+                                    </StackPanel>
+                                </Button>
+                                <ItemsControl ItemsSource="{Binding WifiItems}" ItemTemplate="{StaticResource RowTemplate}" />
+                            </StackPanel>
+                            <Border Style="{StaticResource InnerCard}" Margin="0,10,0,0">
+                                <StackPanel>
+                                    <DockPanel>
+                                        <Button DockPanel.Dock="Right" Content="{h:Loc Restore_CheckInternet}" Command="{Binding CheckInternetCommand}" />
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="&#xE774;" Style="{StaticResource Icon}" Margin="0,0,10,0" />
+                                            <TextBlock Text="{Binding InternetStatus, TargetNullValue=''}" Style="{StaticResource Body}" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <Grid Margin="0,10,0,0" Visibility="{Binding WifiUnlocked, Converter={StaticResource BoolToVis}}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{h:Loc Restore_ConnectTo}" Style="{StaticResource Body}" VerticalAlignment="Center" Margin="0,0,10,0" />
+                                        <ComboBox Grid.Column="1" ItemsSource="{Binding ConnectableProfiles}" SelectedItem="{Binding ConnectProfile}" />
+                                        <Button Grid.Column="2" Content="{h:Loc Restore_Connect}" Command="{Binding ConnectWifiCommand}" Margin="10,0,0,0" />
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <!-- ADIM 3: Uygulamalar -->
+                <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Left" Style="{StaticResource StepNumber}"><TextBlock Text="3" Style="{StaticResource StepNumberText}" /></Border>
+                        <StackPanel>
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                    <ContentPresenter Content="{Binding AppsState}" ContentTemplate="{StaticResource StatusBadge}" Margin="0,0,12,0" />
+                                    <CheckBox Style="{StaticResource Switch}" IsChecked="{Binding DoApps}" IsEnabled="{Binding HasApps}" Margin="0,0,12,0" />
+                                    <Button Content="{h:Loc Restore_RunStep}" Command="{Binding RunAppsCommand}" IsEnabled="{Binding HasApps}" />
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{h:Loc Restore_Step3Title}" Style="{StaticResource H3}" />
+                                    <TextBlock Text="{h:Loc Restore_Step3Desc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                                </StackPanel>
+                            </DockPanel>
+                            <TextBlock Text="{h:Loc Restore_NotInBackup}" Style="{StaticResource Caption}" Margin="0,8,0,0"
+                                       Visibility="{Binding HasApps, Converter={StaticResource InvBoolToVis}}" />
+                            <Border Margin="0,10,0,0" MaxHeight="300" Visibility="{Binding HasApps, Converter={StaticResource BoolToVis}}">
+                                <ListBox ItemsSource="{Binding AppItems}" ItemTemplate="{StaticResource RowTemplate}" Background="Transparent" BorderThickness="0"
+                                         ItemContainerStyle="{StaticResource PlainItem}" VirtualizingPanel.IsVirtualizing="True"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                            </Border>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <!-- ADIM 4: Save'ler -->
+                <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Left" Style="{StaticResource StepNumber}"><TextBlock Text="4" Style="{StaticResource StepNumberText}" /></Border>
+                        <StackPanel>
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                    <ContentPresenter Content="{Binding SavesState}" ContentTemplate="{StaticResource StatusBadge}" Margin="0,0,12,0" />
+                                    <CheckBox Style="{StaticResource Switch}" IsChecked="{Binding DoSaves}" IsEnabled="{Binding HasSaves}" Margin="0,0,12,0" />
+                                    <Button Content="{h:Loc Restore_RunStep}" Command="{Binding RunSavesCommand}" IsEnabled="{Binding HasSaves}" />
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{h:Loc Restore_Step4Title}" Style="{StaticResource H3}" />
+                                    <TextBlock Text="{h:Loc Restore_Step4Desc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                                </StackPanel>
+                            </DockPanel>
+                            <TextBlock Text="{h:Loc Restore_NotInBackup}" Style="{StaticResource Caption}" Margin="0,8,0,0"
+                                       Visibility="{Binding HasSaves, Converter={StaticResource InvBoolToVis}}" />
+                            <StackPanel Visibility="{Binding HasSaves, Converter={StaticResource BoolToVis}}" Margin="0,10,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="320" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{h:Loc Restore_ConflictPolicy}" Style="{StaticResource Body}" VerticalAlignment="Center" Margin="0,0,10,0" />
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding Policies}" SelectedItem="{Binding SelectedPolicy}" DisplayMemberPath="Title" />
+                                    <Button Grid.Column="2" HorizontalAlignment="Left" Content="{h:Loc Restore_SavesPreview}" Command="{Binding PreviewSavesCommand}" Margin="10,0,0,0" />
+                                </Grid>
+                                <TextBlock Text="{h:Loc Restore_ConflictHelp}" Style="{StaticResource Caption}" Margin="0,8,0,0" />
+                                <Border Margin="0,8,0,0" MaxHeight="280">
+                                    <ListBox ItemsSource="{Binding GameItems}" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource PlainItem}"
+                                             VirtualizingPanel.IsVirtualizing="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource InnerCard}" Margin="0,3" Padding="12,8">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="90" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel>
+                                                            <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding Name}" />
+                                                            <TextBlock Text="{Binding Message}" Style="{StaticResource Caption}" Foreground="{StaticResource WarningBrush}" Margin="29,2,0,0"
+                                                                       Visibility="{Binding Message, Converter={StaticResource BoolToVis}}" />
+                                                        </StackPanel>
+                                                        <TextBlock Grid.Column="1" Text="{Binding SizeText}" Style="{StaticResource Caption}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" />
+                                                        <ContentPresenter Grid.Column="2" Content="{Binding Status}" ContentTemplate="{StaticResource StatusBadge}" VerticalAlignment="Center" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Border>
+                                <TextBlock Text="{h:Loc Custom_Title}" Style="{StaticResource Caption}" Margin="0,10,0,2" />
+                                <ItemsControl ItemsSource="{Binding CustomItems}" ItemTemplate="{StaticResource RowTemplate}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <!-- ADIM 5: Windows ayarları -->
+                <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Left" Style="{StaticResource StepNumber}"><TextBlock Text="5" Style="{StaticResource StepNumberText}" /></Border>
+                        <StackPanel>
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                    <ContentPresenter Content="{Binding SettingsState}" ContentTemplate="{StaticResource StatusBadge}" Margin="0,0,12,0" />
+                                    <CheckBox Style="{StaticResource Switch}" IsChecked="{Binding DoSettings}" IsEnabled="{Binding HasSettings}" Margin="0,0,12,0" />
+                                    <Button Content="{h:Loc Restore_RunStep}" Command="{Binding RunSettingsCommand}" IsEnabled="{Binding HasSettings}" />
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{h:Loc Restore_Step5Title}" Style="{StaticResource H3}" />
+                                    <TextBlock Text="{h:Loc Restore_Step5Desc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                                </StackPanel>
+                            </DockPanel>
+                            <TextBlock Text="{h:Loc Restore_NotInBackup}" Style="{StaticResource Caption}" Margin="0,8,0,0"
+                                       Visibility="{Binding HasSettings, Converter={StaticResource InvBoolToVis}}" />
+                            <ItemsControl ItemsSource="{Binding SettingItems}" ItemTemplate="{StaticResource RowTemplate}" Margin="0,10,0,0" />
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <!-- Hatalılar -->
+                <Border Style="{StaticResource Card}" Margin="0,14,0,0" BorderBrush="{StaticResource DangerBrush}"
+                        Visibility="{Binding HasFailures, Converter={StaticResource BoolToVis}}">
+                    <StackPanel>
+                        <DockPanel>
+                            <Button DockPanel.Dock="Right" Style="{StaticResource AccentButton}" Content="{h:Loc Restore_RetryFailed}" Command="{Binding RetryFailedCommand}" />
+                            <TextBlock Text="{h:Loc Restore_FailedTitle}" Style="{StaticResource H3}" Foreground="{StaticResource DangerBrush}" VerticalAlignment="Center" />
+                        </DockPanel>
+                        <ItemsControl ItemsSource="{Binding FailedLines}" Margin="0,10,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Style="{StaticResource Body}" Margin="0,2" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+
+                <!-- Elle kurulması gerekenler -->
+                <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+                    <StackPanel>
+                        <TextBlock Text="{h:Loc Restore_ManualTitle}" Style="{StaticResource H3}" />
+                        <TextBlock Text="{h:Loc Restore_ManualDesc}" Style="{StaticResource Dim}" Margin="0,4,0,10" />
+                        <TextBlock Text="{h:Loc Restore_ManualNone}" Style="{StaticResource Caption}"
+                                   Visibility="{Binding ManualApps.Count, Converter={StaticResource InvBoolToVis}}" />
+                        <Border MaxHeight="300">
+                            <ListBox ItemsSource="{Binding ManualApps}" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource PlainItem}"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{StaticResource InnerCard}" Margin="0,0,8,8" Width="260">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Name}" Style="{StaticResource Body}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
+                                                <TextBlock Style="{StaticResource Caption}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap">
+                                                    <Run Text="{Binding Publisher, Mode=OneWay}" /><Run Text="  " /><Run Text="{Binding Version, Mode=OneWay}" />
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

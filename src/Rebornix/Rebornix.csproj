@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Rebornix</RootNamespace>
+    <AssemblyName>Rebornix</AssemblyName>
+    <ApplicationIcon>Assets\Rebornix.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>1.1.0</Version>
+    <Product>Rebornix</Product>
+    <Description>Format öncesi yedekleme, format sonrası geri yükleme ve toplu uygulama kurulumu aracı</Description>
+    <NeutralLanguage>tr-TR</NeutralLanguage>
+    <SatelliteResourceLanguages>tr;en</SatelliteResourceLanguages>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <!-- Otomatik testlerde (yönetici olmayan kabuktan) arayüzü açabilmek için alternatif manifest -->
+  <PropertyGroup Condition="'$(SmokeManifest)' == 'true'">
+    <ApplicationManifest>app.asinvoker.manifest</ApplicationManifest>
+    <!-- Ayrı ara klasör: normal derlemenin (requireAdministrator) apphost'u yeniden kullanılmasın -->
+    <IntermediateOutputPath>obj\smoke\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <!-- Tek dosya, bağımsız (self-contained) yayın ayarları -->
+  <PropertyGroup Condition="'$(PublishSingleFile)' == 'true' Or '$(_IsPublishing)' == 'true'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>embedded</DebugType>
+    <PublishReadyToRun>false</PublishReadyToRun>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Varsayılan katalog exe içine gömülür; ilk çalıştırmada Data\katalog.json olarak yazılır -->
+    <EmbeddedResource Include="Data\katalog.json" LogicalName="Rebornix.Data.katalog.json" />
+    <Resource Include="Assets\Rebornix.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Rebornix.Tests" />
+  </ItemGroup>
+
+</Project>
