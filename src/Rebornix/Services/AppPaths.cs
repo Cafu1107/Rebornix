@@ -17,8 +17,8 @@ public static class AppPaths
     public static string LogsDir => Path.Combine(BaseDir, "Logs");
     public static string ToolsDir => Path.Combine(BaseDir, "Tools");
     public static string SettingsFile => Path.Combine(DataDir, "settings.json");
-    public static string CatalogFile => Path.Combine(DataDir, "katalog.json");
-    public static string ProfilesFile => Path.Combine(DataDir, "profiller.json");
+    public static string CatalogFile => Path.Combine(DataDir, "catalog.json");
+    public static string ProfilesFile => Path.Combine(DataDir, "profiles.json");
 
     public static string? ExePath => Environment.ProcessPath;
 
@@ -43,8 +43,8 @@ public sealed class BackupLayout
     public string DataDir => Path.Combine(Root, "Data");
     public string ManifestFile => Path.Combine(DataDir, "backup_manifest.json");
     public string AppsFile => Path.Combine(DataDir, "winget_apps.json");
-    public string ManualAppsFile => Path.Combine(DataDir, "elle_kurulacaklar.json");
-    public string AllProgramsFile => Path.Combine(DataDir, "tum_programlar.json");
+    public string ManualAppsFile => Path.Combine(DataDir, "manual_install.json");
+    public string AllProgramsFile => Path.Combine(DataDir, "all_programs.json");
     public string ProgressFile => Path.Combine(DataDir, "restore_progress.json");
     public string BackupsDir => Path.Combine(Root, "Backups");
     public string LudusaviDir => Path.Combine(BackupsDir, "Ludusavi");
@@ -53,7 +53,7 @@ public sealed class BackupLayout
     public string CustomManifest => Path.Combine(CustomDir, "custom_folders.json");
     public string WindowsSettingsDir => Path.Combine(Root, "WindowsSettings");
     public string WindowsSettingsFile => Path.Combine(WindowsSettingsDir, "settings.json");
-    public string SnapshotsDir => Path.Combine(WindowsSettingsDir, "_GeriAlma");
+    public string SnapshotsDir => Path.Combine(WindowsSettingsDir, "_Undo");
 
     /// <summary>Bu klasörde tanınabilir bir yedek var mı?</summary>
     public bool LooksLikeBackup()

@@ -1,10 +1,11 @@
 using System.Buffers.Binary;
 using System.Security.Cryptography;
 using System.Text;
+using Rebornix.Helpers;
 
 namespace Rebornix.Services;
 
-public sealed class WrongPasswordException() : Exception("Parola yanlış veya dosya bozuk.");
+public sealed class WrongPasswordException() : Exception("Wrong password or damaged file.");
 
 public sealed class InvalidBackupFileException(string message) : Exception(message);
 
@@ -27,7 +28,7 @@ public static class WifiCrypto
     public static byte[] Encrypt(byte[] plaintext, string password, int iterations = Iterations)
     {
         ArgumentNullException.ThrowIfNull(plaintext);
-        if (string.IsNullOrEmpty(password)) throw new ArgumentException("Parola boş olamaz.", nameof(password));
+        if (string.IsNullOrEmpty(password)) throw new ArgumentException("Password must not be empty.", nameof(password));
 
         var salt = RandomNumberGenerator.GetBytes(SaltSize);
         var nonce = RandomNumberGenerator.GetBytes(NonceSize);
@@ -60,14 +61,14 @@ public static class WifiCrypto
     {
         ArgumentNullException.ThrowIfNull(data);
         if (data.Length < HeaderSize + TagSize || !data.AsSpan(0, 5).SequenceEqual(Magic))
-            throw new InvalidBackupFileException("Bu dosya bir Rebornix Wi-Fi yedeği değil.");
+            throw new InvalidBackupFileException(Loc.Get("Wifi_NotABackup"));
         if (data[5] != FormatVersion)
-            throw new InvalidBackupFileException($"Desteklenmeyen yedek sürümü: {data[5]}");
+            throw new InvalidBackupFileException(Loc.F("Wifi_UnsupportedVersion", data[5]));
 
         var span = data.AsSpan();
         var iterations = BinaryPrimitives.ReadInt32LittleEndian(span.Slice(6, 4));
         if (iterations is < 100_000 or > 50_000_000)
-            throw new InvalidBackupFileException("Yedek başlığı geçersiz.");
+            throw new InvalidBackupFileException(Loc.Get("Wifi_BadHeader"));
         var salt = span.Slice(10, SaltSize).ToArray();
         var nonce = span.Slice(10 + SaltSize, NonceSize);
         var tag = span.Slice(HeaderSize, TagSize);
@@ -142,10 +143,10 @@ public static class SecureFile
         foreach (var f in Directory.EnumerateFiles(dir, "*", SearchOption.AllDirectories))
         {
             try { Wipe(f); }
-            catch (Exception ex) { Log.Warn($"Geçici dosya silinemedi ({Path.GetFileName(f)}): {ex.Message}"); }
+            catch (Exception ex) { Log.Warn($"Could not delete temp file ({Path.GetFileName(f)}): {ex.Message}"); }
         }
         try { Directory.Delete(dir, recursive: true); }
-        catch (Exception ex) { Log.Warn("Geçici klasör silinemedi: " + ex.Message); }
+        catch (Exception ex) { Log.Warn("Could not delete temp folder: " + ex.Message); }
     }
 
     public const string WifiTempPrefix = "Rebornix_wifi_";

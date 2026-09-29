@@ -24,11 +24,11 @@ public sealed partial class CatalogViewModel : ObservableObject, IPageActivated
 
     public ObservableCollection<CatalogItem> Items { get; } = [];
     public ICollectionView View { get; }
-    public ObservableCollection<string> Categories { get; } = [];
+    public ObservableCollection<CategoryOption> Categories { get; } = [];
     public ObservableCollection<string> ProfileNames { get; } = [];
 
     [ObservableProperty] private string _searchText = "";
-    [ObservableProperty] private string _selectedCategory = Loc.Get("Catalog_AllCategories");
+    [ObservableProperty] private CategoryOption? _selectedCategory;
     [ObservableProperty] private string? _selectedProfile;
     [ObservableProperty] private string _statusText = "";
     [ObservableProperty] private bool _hasFailures;
@@ -37,12 +37,12 @@ public sealed partial class CatalogViewModel : ObservableObject, IPageActivated
     public string SelectionText => Loc.F("Catalog_Selection", SelectedCount, Items.Count, Items.Count(i => i.IsInstalled));
 
     partial void OnSearchTextChanged(string value) => View.Refresh();
-    partial void OnSelectedCategoryChanged(string value) => View.Refresh();
+    partial void OnSelectedCategoryChanged(CategoryOption? value) => View.Refresh();
 
     private bool Filter(object o)
     {
         if (o is not CatalogItem i) return false;
-        if (SelectedCategory != Loc.Get("Catalog_AllCategories") && i.Category != SelectedCategory) return false;
+        if (!string.IsNullOrEmpty(SelectedCategory?.Id) && i.Category != SelectedCategory.Id) return false;
         if (string.IsNullOrWhiteSpace(SearchText)) return true;
         var q = SearchText.Trim();
         return i.Name.Contains(q, StringComparison.CurrentCultureIgnoreCase) ||
@@ -73,8 +73,8 @@ public sealed partial class CatalogViewModel : ObservableObject, IPageActivated
             Items.Add(item);
         }
         Categories.Clear();
-        Categories.Add(Loc.Get("Catalog_AllCategories"));
-        foreach (var c in catalog.Categories) Categories.Add(c);
+        Categories.Add(new CategoryOption("", Loc.Get("Catalog_AllCategories")));
+        foreach (var c in catalog.Categories) Categories.Add(new CategoryOption(c, CatalogApp.CategoryName(c)));
         SelectedCategory = Categories[0];
 
         _profiles = ProfileService.Load();

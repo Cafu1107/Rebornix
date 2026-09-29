@@ -96,7 +96,7 @@ public class IntegrationTests(ITestOutputHelper output)
         output.WriteLine($"Dışa aktarılan: {r.Exported}, {r.TotalBytes} bayt, sorun: {string.Join(" | ", r.Problems)}");
         Assert.Equal(pick.Count, r.Exported);
         Assert.Empty(r.Problems);
-        Assert.Empty(Directory.GetDirectories(dir, "_disa_aktarim_*"));
+        Assert.Empty(Directory.GetDirectories(dir, "_export_*"));
         var manifest = DriverService.LoadManifest(dir);
         Assert.Equal(pick.Count, manifest.Count);
         Assert.Empty(DriverService.Verify(dir, manifest));

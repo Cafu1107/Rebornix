@@ -40,7 +40,11 @@ public sealed class AppSettings
 
     /// <summary>İlk açılışta karşılama ekranı gösterilsin mi? (Bir kez gösterilir.)</summary>
     public bool ShowWelcome { get; set; } = true;
-    public string Language { get; set; } = "tr-TR";
+    /// <summary>Arayüz dili: "en" (varsayılan), "tr" veya "de".</summary>
+    public string Language { get; set; } = "en";
+
+    /// <summary>Tema: "Dark" (varsayılan), "Light" veya "System" (Windows ayarını takip eder).</summary>
+    public string Theme { get; set; } = "Dark";
     public string? LastBackupRoot { get; set; }
     public DateTime? LastSummaryTime { get; set; }
     public string LastSummaryTitle { get; set; } = "";
@@ -64,7 +68,7 @@ public sealed class SettingsService
         }
         catch (Exception ex)
         {
-            Log.Warn("Ayar dosyası okunamadı, varsayılanlar kullanılıyor: " + ex.Message);
+            Log.Warn("Settings file unreadable, using defaults: " + ex.Message);
             Current = new AppSettings();
         }
     }

@@ -13,14 +13,17 @@ public sealed partial class SettingsViewModel : ObservableObject, IPageActivated
     private readonly Action _showGuide;
     private readonly Action _showWelcome;
 
-    public SettingsViewModel(AppServices app, Action showGuide, Action showWelcome)
+    public SettingsViewModel(AppServices app, Action showGuide, Action showWelcome, AppearanceViewModel appearance)
     {
+        Appearance = appearance;
         _app = app;
         _showGuide = showGuide;
         _showWelcome = showWelcome;
         _dryRun = app.Settings.Current.DryRun;
         _offerRestorePoint = app.Settings.Current.OfferRestorePoint;
     }
+
+    public AppearanceViewModel Appearance { get; }
 
     [ObservableProperty] private bool _dryRun;
     [ObservableProperty] private bool _offerRestorePoint;

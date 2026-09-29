@@ -45,7 +45,7 @@ public sealed partial class LudusaviService
             throw new InvalidOperationException(Loc.Get("Ludusavi_AssetNotFound"));
 
         Log.Info(Loc.F("Ludusavi_Downloading", tag));
-        var zip = Path.Combine(AppPaths.ToolsDir, "ludusavi_indirme.zip");
+        var zip = Path.Combine(AppPaths.ToolsDir, "ludusavi_download.zip");
         try
         {
             await using (var s = await Http.GetStreamAsync(url, ct))

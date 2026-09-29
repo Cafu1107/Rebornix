@@ -151,7 +151,7 @@ public sealed class WindowsSettingsService
     ];
 
     /// <summary>Değerlendirilip güvenilir bulunmadığı için arayüze KONMAYAN kalemler.</summary>
-    public static IReadOnlyList<ExcludedSetting> Excluded { get; } =
+    public static IReadOnlyList<ExcludedSetting> Excluded =>
     [
         new(Loc.Get("WinSetEx_DefaultApps"), Loc.Get("WinSetEx_DefaultApps_Reason")),
         new(Loc.Get("WinSetEx_PowerPlans"), Loc.Get("WinSetEx_PowerPlans_Reason")),
@@ -393,7 +393,7 @@ public sealed class WindowsSettingsService
         var picturesDir = IsSandbox
             ? Path.Combine(Path.GetTempPath(), "RebornixTest_Pictures")
             : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "Rebornix");
-        var dest = Path.Combine(picturesDir, $"duvar_kagidi_{DateTime.Now:yyyyMMdd_HHmmss}{Path.GetExtension(src)}");
+        var dest = Path.Combine(picturesDir, $"wallpaper_{DateTime.Now:yyyyMMdd_HHmmss}{Path.GetExtension(src)}");
         if (dryRun)
         {
             Log.Info(Loc.F("Dry_Wallpaper", dest));
@@ -498,9 +498,9 @@ public sealed class WindowsSettingsService
     internal void WriteValue(RegValueData v)
     {
         if (!Enum.TryParse<RegistryValueKind>(v.Kind, out var kind))
-            throw new InvalidOperationException("Bilinmeyen değer türü: " + v.Kind);
+            throw new InvalidOperationException("Unknown value kind: " + v.Kind);
         if (!IsAllowedKey(v.Key))
-            throw new InvalidOperationException("İzin verilmeyen anahtar: " + v.Key);
+            throw new InvalidOperationException("Key not allowed: " + v.Key);
 
         object data = kind switch
         {
@@ -509,7 +509,7 @@ public sealed class WindowsSettingsService
             RegistryValueKind.String or RegistryValueKind.ExpandString => v.Text ?? "",
             RegistryValueKind.MultiString => v.Multi ?? [],
             RegistryValueKind.Binary => Convert.FromBase64String(v.Base64 ?? ""),
-            _ => throw new InvalidOperationException("Desteklenmeyen tür: " + kind)
+            _ => throw new InvalidOperationException("Unsupported kind: " + kind)
         };
         using var k = Registry.CurrentUser.CreateSubKey(Map(v.Key), writable: true);
         k.SetValue(v.Name, data, kind);

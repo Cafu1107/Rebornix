@@ -32,7 +32,7 @@
         <Style x:Key="Kicker" TargetType="TextBlock">
             <Setter Property="FontSize" Value="13" />
             <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Foreground" Value="{StaticResource AccentGradientH}" />
+            <Setter Property="Foreground" Value="{StaticResource WelcomeGradient}" />
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
         <Style x:Key="BigTitle" TargetType="TextBlock">
@@ -186,6 +186,11 @@
             <DockPanel>
                 <Button DockPanel.Dock="Right" Style="{StaticResource GhostButton}" Foreground="#FFB4BCD0" Command="{Binding FinishCommand}"
                         Content="{h:Loc Wel_Skip}" />
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,0,14,0" VerticalAlignment="Center">
+                    <TextBlock Text="&#xE774;" Style="{StaticResource Icon}" FontSize="14" Foreground="#FFB4BCD0" Margin="0,0,8,0" ToolTip="{h:Loc Wel_Language}" />
+                    <ComboBox Width="130" ItemsSource="{Binding Appearance.Languages}" SelectedItem="{Binding Appearance.SelectedLanguage}"
+                              DisplayMemberPath="Name" ToolTip="{h:Loc Wel_Language}" />
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Source="{StaticResource LogoImage}" Width="30" Height="30" />
                     <TextBlock Text="Rebornix" Foreground="White" FontSize="17" FontWeight="Bold" Margin="10,0,0,0" VerticalAlignment="Center" />
@@ -208,10 +213,10 @@
                                     </RadialGradientBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <Ellipse x:Name="Ring1" Width="160" Height="160" Stroke="{StaticResource AccentGradientH}" StrokeThickness="2" RenderTransformOrigin="0.5,0.5" Opacity="0">
+                            <Ellipse x:Name="Ring1" Width="160" Height="160" Stroke="{StaticResource WelcomeGradient}" StrokeThickness="2" RenderTransformOrigin="0.5,0.5" Opacity="0">
                                 <Ellipse.RenderTransform><ScaleTransform x:Name="Ring1Scale" /></Ellipse.RenderTransform>
                             </Ellipse>
-                            <Ellipse x:Name="Ring2" Width="160" Height="160" Stroke="{StaticResource AccentGradientH}" StrokeThickness="2" RenderTransformOrigin="0.5,0.5" Opacity="0">
+                            <Ellipse x:Name="Ring2" Width="160" Height="160" Stroke="{StaticResource WelcomeGradient}" StrokeThickness="2" RenderTransformOrigin="0.5,0.5" Opacity="0">
                                 <Ellipse.RenderTransform><ScaleTransform x:Name="Ring2Scale" /></Ellipse.RenderTransform>
                             </Ellipse>
                             <Image Source="{StaticResource LogoImage}" Width="140" Height="140">
@@ -223,7 +228,7 @@
                         </Grid>
                         <TextBlock Text="{h:Loc Wel_S1_Kicker}" Style="{StaticResource Kicker}" Margin="0,6,0,0" />
                         <TextBlock Style="{StaticResource BigTitle}" FontSize="52">
-                            <Run Text="Rebornix" Foreground="{StaticResource AccentGradientH}" />
+                            <Run Text="Rebornix" Foreground="{StaticResource WelcomeGradient}" />
                         </TextBlock>
                         <TextBlock Text="{h:Loc Wel_S1_Title}" Style="{StaticResource BigTitle}" FontSize="30" FontWeight="SemiBold" Margin="0,4,0,0" />
                         <TextBlock Text="{h:Loc Wel_S1_Text}" Style="{StaticResource Lead}" />
@@ -275,13 +280,13 @@
                             <!-- Akış -->
                             <Grid Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
                                 <Rectangle Height="2" RadiusX="1" RadiusY="1" Fill="#22FFFFFF" />
-                                <Ellipse x:Name="Dot1" Width="10" Height="10" Fill="{StaticResource AccentGradientH}" HorizontalAlignment="Left">
+                                <Ellipse x:Name="Dot1" Width="10" Height="10" Fill="{StaticResource WelcomeGradient}" HorizontalAlignment="Left">
                                     <Ellipse.RenderTransform><TranslateTransform x:Name="Dot1Shift" /></Ellipse.RenderTransform>
                                 </Ellipse>
-                                <Ellipse x:Name="Dot2" Width="10" Height="10" Fill="{StaticResource AccentGradientH}" HorizontalAlignment="Left" Opacity="0">
+                                <Ellipse x:Name="Dot2" Width="10" Height="10" Fill="{StaticResource WelcomeGradient}" HorizontalAlignment="Left" Opacity="0">
                                     <Ellipse.RenderTransform><TranslateTransform x:Name="Dot2Shift" /></Ellipse.RenderTransform>
                                 </Ellipse>
-                                <Ellipse x:Name="Dot3" Width="10" Height="10" Fill="{StaticResource AccentGradientH}" HorizontalAlignment="Left" Opacity="0">
+                                <Ellipse x:Name="Dot3" Width="10" Height="10" Fill="{StaticResource WelcomeGradient}" HorizontalAlignment="Left" Opacity="0">
                                     <Ellipse.RenderTransform><TranslateTransform x:Name="Dot3Shift" /></Ellipse.RenderTransform>
                                 </Ellipse>
                             </Grid>
@@ -316,7 +321,7 @@
                         <Grid Height="270" Width="660" HorizontalAlignment="Center">
                             <!-- Çizgi ve dolan ilerleme -->
                             <Rectangle Height="4" RadiusX="2" RadiusY="2" Fill="#1FFFFFFF" Margin="52,0,52,26" VerticalAlignment="Center" />
-                            <Rectangle Height="4" RadiusX="2" RadiusY="2" Fill="{StaticResource AccentGradientH}" Margin="52,0,52,26" VerticalAlignment="Center"
+                            <Rectangle Height="4" RadiusX="2" RadiusY="2" Fill="{StaticResource WelcomeGradient}" Margin="52,0,52,26" VerticalAlignment="Center"
                                        RenderTransformOrigin="0,0.5">
                                 <Rectangle.RenderTransform><ScaleTransform x:Name="ProgressScale" ScaleX="0" /></Rectangle.RenderTransform>
                             </Rectangle>
@@ -450,7 +455,7 @@
                                                     </MultiBinding>
                                                 </DataTrigger.Binding>
                                                 <Setter TargetName="Dot" Property="Width" Value="32" />
-                                                <Setter TargetName="Dot" Property="Background" Value="{StaticResource AccentGradientH}" />
+                                                <Setter TargetName="Dot" Property="Background" Value="{StaticResource WelcomeGradient}" />
                                             </DataTrigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>

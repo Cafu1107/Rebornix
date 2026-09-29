@@ -11,10 +11,86 @@
             <TextBlock Text="{h:Loc Settings_Title}" Style="{StaticResource H1}" />
             <TextBlock Text="{h:Loc Settings_Subtitle}" Style="{StaticResource Dim}" Margin="0,6,0,20" />
 
+            <!-- Görünüm: dil + tema -->
             <Border Style="{StaticResource Card}">
                 <DockPanel>
-                    <CheckBox DockPanel.Dock="Right" Style="{StaticResource Switch}" IsChecked="{Binding DryRun}" VerticalAlignment="Center" />
-                    <StackPanel>
+                    <ComboBox DockPanel.Dock="Right" Width="200" VerticalAlignment="Center" Margin="16,0,0,0"
+                              ItemsSource="{Binding Appearance.Languages}" SelectedItem="{Binding Appearance.SelectedLanguage}" DisplayMemberPath="Name" />
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" CornerRadius="12" Background="{StaticResource AccentGradient}" VerticalAlignment="Top" Margin="0,0,14,0">
+                            <TextBlock Text="&#xE774;" Style="{StaticResource Icon}" Foreground="White" HorizontalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{h:Loc Settings_LanguageTitle}" Style="{StaticResource H3}" />
+                            <TextBlock Text="{h:Loc Settings_LanguageDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" CornerRadius="12" Background="{StaticResource AccentGradient}" VerticalAlignment="Top" Margin="0,0,14,0">
+                            <TextBlock Text="&#xE790;" Style="{StaticResource Icon}" Foreground="White" HorizontalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{h:Loc Settings_ThemeTitle}" Style="{StaticResource H3}" />
+                            <TextBlock Text="{h:Loc Settings_ThemeDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                    <!-- Üç büyük seçenek kartı -->
+                    <ItemsControl ItemsSource="{Binding Appearance.Themes}" Margin="0,16,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="Theme" Command="{Binding DataContext.Appearance.SelectThemeCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                             CommandParameter="{Binding}" Margin="0,0,10,0" Cursor="Hand">
+                                    <RadioButton.IsChecked>
+                                        <MultiBinding Converter="{StaticResource SameObject}" Mode="OneWay">
+                                            <Binding />
+                                            <Binding Path="DataContext.Appearance.SelectedTheme" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                        </MultiBinding>
+                                    </RadioButton.IsChecked>
+                                    <RadioButton.Template>
+                                        <ControlTemplate TargetType="RadioButton">
+                                            <Border x:Name="Bd" CornerRadius="14" Padding="16,14" Background="{StaticResource Surface2Brush}"
+                                                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="1.5">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Border x:Name="Tile" Width="34" Height="34" CornerRadius="10" Background="{StaticResource Surface3Brush}">
+                                                        <TextBlock x:Name="Glyph" Text="{Binding Glyph}" Style="{StaticResource Icon}" FontSize="16" HorizontalAlignment="Center"
+                                                                   Foreground="{StaticResource TextDimBrush}" />
+                                                    </Border>
+                                                    <TextBlock Text="{Binding Name}" Margin="12,0,0,0" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center"
+                                                               Foreground="{StaticResource TextBrush}" />
+                                                </StackPanel>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource AccentHoverBrush}" />
+                                                </Trigger>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                                                    <Setter TargetName="Tile" Property="Background" Value="{StaticResource AccentGradient}" />
+                                                    <Setter TargetName="Glyph" Property="Foreground" Value="White" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </RadioButton.Template>
+                                </RadioButton>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0">
+                <DockPanel>
+                    <CheckBox DockPanel.Dock="Right" Style="{StaticResource Switch}" IsChecked="{Binding DryRun}" VerticalAlignment="Center" />                    <StackPanel>
                         <TextBlock Text="{h:Loc Settings_DryTitle}" Style="{StaticResource H3}" />
                         <TextBlock Text="{h:Loc Settings_DryDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
                     </StackPanel>
@@ -82,12 +158,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Style="{StaticResource Card}" Margin="0,12,0,0">
-                <StackPanel>
-                    <TextBlock Text="{h:Loc Settings_LanguageTitle}" Style="{StaticResource H3}" />
-                    <TextBlock Text="{h:Loc Settings_LanguageDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />
-                </StackPanel>
-            </Border>
+
 
             <TextBlock Style="{StaticResource Caption}" Margin="4,16,0,0">
                 <Run Text="Rebornix" /><Run Text=" v" /><Run Text="{Binding Version, Mode=OneWay}" /><Run Text=" · " /><Run Text="{h:Loc Settings_About}" />

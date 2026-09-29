@@ -81,7 +81,7 @@
                 <TextBlock Text="&#xE721;" Style="{StaticResource Icon}" FontSize="13" Foreground="{StaticResource TextDimBrush}" Margin="12,0,0,0"
                            HorizontalAlignment="Left" IsHitTestVisible="False" />
             </Grid>
-            <ComboBox Grid.Column="1" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Margin="10,0,0,0" />
+            <ComboBox Grid.Column="1" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" DisplayMemberPath="Name" Margin="10,0,0,0" />
             <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="10,0,0,0">
                 <Button Content="{h:Loc Btn_SelectAll}" Command="{Binding SelectAllCommand}" Margin="0,0,8,0" />
                 <Button Content="{h:Loc Btn_Clear}" Command="{Binding ClearSelectionCommand}" Margin="0,0,8,0" />
@@ -124,7 +124,7 @@
                                     </Border>
                                     <StackPanel Margin="12,0,26,0" VerticalAlignment="Center" MaxWidth="170">
                                         <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="14" TextTrimming="CharacterEllipsis" />
-                                        <TextBlock Text="{Binding Category}" Style="{StaticResource Caption}" />
+                                        <TextBlock Text="{Binding CategoryName}" Style="{StaticResource Caption}" />
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">

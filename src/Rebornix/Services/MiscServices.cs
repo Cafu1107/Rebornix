@@ -118,13 +118,13 @@ public static class CatalogService
 {
     public static string EmbeddedCatalogJson()
     {
-        using var s = Assembly.GetExecutingAssembly().GetManifestResourceStream("Rebornix.Data.katalog.json")
-                      ?? throw new InvalidOperationException("Gömülü katalog bulunamadı.");
+        using var s = Assembly.GetExecutingAssembly().GetManifestResourceStream("Rebornix.Data.catalog.json")
+                      ?? throw new InvalidOperationException("Embedded catalog not found.");
         using var r = new StreamReader(s);
         return r.ReadToEnd();
     }
 
-    /// <summary>Data\katalog.json okunur; yoksa gömülü varsayılan katalog oraya yazılır.</summary>
+    /// <summary>Data\catalog.json okunur; yoksa gömülü varsayılan katalog oraya yazılır.</summary>
     public static CatalogFile Load()
     {
         try
@@ -172,8 +172,8 @@ public static class ProfileService
         // İlk çalıştırma: örnek profiller
         var defaults = new Dictionary<string, List<string>>(StringComparer.CurrentCultureIgnoreCase)
         {
-            ["Minimal"] = ["Google.Chrome", "7zip.7zip", "VideoLAN.VLC", "Notepad++.Notepad++"],
-            ["Oyun PC'si"] =
+            [Loc.Get("Profile_Minimal")] = ["Google.Chrome", "7zip.7zip", "VideoLAN.VLC", "Notepad++.Notepad++"],
+            [Loc.Get("Profile_Gaming")] =
             [
                 "Google.Chrome", "Valve.Steam", "EpicGames.EpicGamesLauncher", "GOG.Galaxy", "Discord.Discord",
                 "Spotify.Spotify", "OBSProject.OBSStudio", "7zip.7zip", "CPUID.CPU-Z", "TechPowerUp.GPU-Z"

@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Windows;
 using System.Windows.Threading;
 using Rebornix.Helpers;
@@ -10,6 +9,9 @@ namespace Rebornix;
 public partial class App : Application
 {
     private AppServices? _services;
+    private string? _smokeDir;
+    private string? _langOverride;
+    private string? _themeOverride;
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -18,10 +20,10 @@ public partial class App : Application
         // Beklenmeyen hatalarda uygulama kapanmasın, kullanıcıya anlaşılır mesaj gösterilsin
         DispatcherUnhandledException += OnDispatcherException;
         AppDomain.CurrentDomain.UnhandledException += (_, a) =>
-            Log.Error("Beklenmeyen hata: " + (a.ExceptionObject as Exception)?.Message);
+            Log.Error("Unexpected error: " + (a.ExceptionObject as Exception)?.Message);
         TaskScheduler.UnobservedTaskException += (_, a) =>
         {
-            Log.Error("Arka plan hatası", a.Exception);
+            Log.Error("Background error", a.Exception);
             a.SetObserved();
         };
 
@@ -37,48 +39,91 @@ public partial class App : Application
             return;
         }
 
+        // Gizli seçenekler (geliştirme / README ekran görüntüleri):
+        //   --smoke <klasör>  tüm sayfaları açıp ekran görüntüsü alır ve kapanır
+        //   --lang en|tr|de   --theme Dark|Light   (kaydedilmez, sadece bu çalıştırma için)
+        _smokeDir = Arg(e.Args, "--smoke");
+        _langOverride = Arg(e.Args, "--lang");
+        _themeOverride = Arg(e.Args, "--theme");
+
         _services = new AppServices();
         _services.Settings.Load();
-        ApplyLanguage(_services.Settings.Current.Language);
+        var s = _services.Settings.Current;
+        s.Language = Loc.Normalize(s.Language);
+        s.Theme = ThemeManager.Normalize(s.Theme);
+        Loc.Apply(_langOverride ?? s.Language);
+        ThemeManager.Apply(_themeOverride ?? s.Theme);
 
         Log.Info(Loc.F("App_Started", typeof(App).Assembly.GetName().Version?.ToString(3), AppPaths.BaseDir));
         if (!Elevation.IsAdmin) Log.Warn(Loc.Get("Home_AdminMissing"));
-        if (_services.Settings.Current.DryRun) Log.Warn(Loc.Get("Dry_Banner"));
+        if (s.DryRun) Log.Warn(Loc.Get("Dry_Banner"));
 
         var cleaned = SecureFile.CleanupStaleWifiTemp();
         if (cleaned > 0) Log.Warn(Loc.F("Wifi_StaleTempCleaned", cleaned));
 
-        // Gizli otomatik arayüz testi: tüm sayfaları açıp ekran görüntüsü alır ve kapanır
-        var smokeIndex = Array.IndexOf(e.Args, "--smoke");
-        var smokeDir = smokeIndex >= 0 && e.Args.Length > smokeIndex + 1 ? e.Args[smokeIndex + 1] : null;
-        if (smokeDir is not null)
+        if (_smokeDir is not null)
         {
             _services.Dialogs.AutoMode = true;
-            _services.Settings.Current.DryRun = true; // test sırasında hiçbir gerçek işlem yapılmaz
+            s.DryRun = true; // test sırasında hiçbir gerçek işlem yapılmaz
         }
 
-        var vm = new MainViewModel(_services);
+        var vm = ShowMainWindow(null);
+        if (_smokeDir is not null) _ = SmokeTest.RunAsync((MainWindow)MainWindow, vm, _smokeDir);
+        else if (s.ShowWelcome) vm.Welcome.Open();
+    }
+
+    private static string? Arg(string[] args, string name)
+    {
+        var i = Array.IndexOf(args, name);
+        return i >= 0 && args.Length > i + 1 ? args[i + 1] : null;
+    }
+
+    private MainViewModel ShowMainWindow(Window? previous)
+    {
+        var vm = new MainViewModel(_services!);
         var window = new MainWindow { DataContext = vm };
+        if (previous is not null)
+        {
+            window.WindowStartupLocation = WindowStartupLocation.Manual;
+            window.Left = previous.Left;
+            window.Top = previous.Top;
+            window.Width = previous.Width;
+            window.Height = previous.Height;
+            window.WindowState = previous.WindowState;
+        }
         MainWindow = window;
         window.Show();
         vm.Home.OnActivated();
-
-        if (smokeDir is not null) _ = SmokeTest.RunAsync(window, vm, smokeDir);
-        else if (_services.Settings.Current.ShowWelcome) vm.Welcome.Open();
+        return vm;
     }
 
-    private static void ApplyLanguage(string language)
+    /// <summary>
+    /// Dil veya tema değişince çağrılır: yeni ayarı uygular ve ana pencereyi yeniden oluşturur
+    /// (UAC tekrar sorulmaz). Açık sayfa ve karşılama ekranı durumu korunur.
+    /// </summary>
+    public static bool ReloadUi(string? pageKey, bool reopenWelcome)
     {
-        try
+        if (Current is not App app || app._services is null) return false;
+        if (app._services.Operation.IsBusy)
         {
-            var culture = CultureInfo.GetCultureInfo(string.IsNullOrWhiteSpace(language) ? "tr-TR" : language);
-            CultureInfo.DefaultThreadCurrentUICulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
+            app._services.Dialogs.Warn("Rebornix", Loc.Get("Ui_ReloadBusy"));
+            return false;
         }
-        catch (CultureNotFoundException)
-        {
-            // varsayılan dil
-        }
+
+        var s = app._services.Settings.Current;
+        Log.Info($"UI reload: language={s.Language}, theme={s.Theme}, page={pageKey}");
+        app._services.Settings.Save();
+        app._langOverride = null;
+        app._themeOverride = null;
+        Loc.Apply(s.Language);
+        ThemeManager.Apply(s.Theme);
+
+        var old = app.MainWindow;
+        var vm = app.ShowMainWindow(old);
+        if (pageKey is not null) vm.Navigate(pageKey);
+        if (reopenWelcome) vm.Welcome.Open();
+        old?.Close();
+        return true;
     }
 
     private void OnDispatcherException(object sender, DispatcherUnhandledExceptionEventArgs e)

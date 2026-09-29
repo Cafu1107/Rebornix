@@ -1,0 +1,36 @@
+name: 🐞 Bug report / Hata bildir
+description: Rebornix didn't work as expected / Rebornix beklendiği gibi çalışmadı
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened? / Ne oldu?
+      description: Which button did you press, what did you expect, what happened instead? You can write in English, Turkish or German.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Rebornix version / sürümü
+      placeholder: v1.4.0
+    validations:
+      required: true
+  - type: dropdown
+    id: windows
+    attributes:
+      label: Windows version / sürümü
+      options: [Windows 11, Windows 10]
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: App language / Uygulama dili
+      options: [English, Türkçe, Deutsch]
+  - type: textarea
+    id: log
+    attributes:
+      label: Log / Günlük
+      description: Paste the error message or the log file (Logs folder next to the exe) if you have it. Remove personal information such as Wi-Fi passwords first.
+      render: text

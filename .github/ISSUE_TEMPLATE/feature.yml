@@ -1,0 +1,15 @@
+name: 💡 Feature request / Öneri
+description: A new feature, or an app you'd like added to the catalog / Yeni bir özellik veya kataloğa eklenmesini istediğin bir program
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like? / Ne istiyorsun?
+    validations:
+      required: true
+  - type: input
+    id: winget
+    attributes:
+      label: winget ID (for app suggestions) / winget kimliği
+      placeholder: VideoLAN.VLC

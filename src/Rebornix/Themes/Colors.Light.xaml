@@ -1,0 +1,77 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Parlak mod renkleri. Colors.Dark.xaml ile aynı anahtarlara sahip olmalı. -->
+
+    <Color x:Key="BgColor">#FFF3F4F9</Color>
+    <Color x:Key="SidebarColor">#FFFFFFFF</Color>
+    <Color x:Key="SurfaceColor">#FFFFFFFF</Color>
+    <Color x:Key="Surface2Color">#FFF2F3F8</Color>
+    <Color x:Key="Surface3Color">#FFE5E8F1</Color>
+    <Color x:Key="BorderColor">#FFE1E4EE</Color>
+    <Color x:Key="TextColor">#FF141926</Color>
+    <Color x:Key="TextDimColor">#FF5B6479</Color>
+    <Color x:Key="AccentColor">#FF6D4DFF</Color>
+    <Color x:Key="AccentHoverColor">#FF5B3BF0</Color>
+    <Color x:Key="AccentPressedColor">#FF4B2DDB</Color>
+    <Color x:Key="AccentSoftColor">#FFECE8FF</Color>
+    <Color x:Key="SuccessColor">#FF059669</Color>
+    <Color x:Key="WarningColor">#FFB45309</Color>
+    <Color x:Key="DangerColor">#FFDC2626</Color>
+    <Color x:Key="InfoColor">#FF2563EB</Color>
+    <Color x:Key="SidebarGlowColor">#337B61FF</Color>
+
+    <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}" />
+    <SolidColorBrush x:Key="SidebarBrush" Color="{StaticResource SidebarColor}" />
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
+    <SolidColorBrush x:Key="Surface2Brush" Color="{StaticResource Surface2Color}" />
+    <SolidColorBrush x:Key="Surface3Brush" Color="{StaticResource Surface3Color}" />
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="TextDimBrush" Color="{StaticResource TextDimColor}" />
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
+    <SolidColorBrush x:Key="AccentHoverBrush" Color="{StaticResource AccentHoverColor}" />
+    <SolidColorBrush x:Key="AccentPressedBrush" Color="{StaticResource AccentPressedColor}" />
+    <SolidColorBrush x:Key="AccentSoftBrush" Color="{StaticResource AccentSoftColor}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}" />
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}" />
+    <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource InfoColor}" />
+    <SolidColorBrush x:Key="WarningSoftBrush" Color="#1FF59E0B" />
+    <SolidColorBrush x:Key="DangerSoftBrush" Color="#1ADC2626" />
+    <SolidColorBrush x:Key="InfoSoftBrush" Color="#172563EB" />
+    <SolidColorBrush x:Key="SuccessSoftBrush" Color="#17059669" />
+
+    <!-- İnce katmanlar (fareyle üzerine gelme, çerçeve) -->
+    <SolidColorBrush x:Key="HoverOverlayBrush" Color="#0B1E1B4B" />
+    <SolidColorBrush x:Key="SubtleBorderBrush" Color="#1A1E1B4B" />
+    <SolidColorBrush x:Key="BadgeTextBrush" Color="#FF4C35D6" />
+    <SolidColorBrush x:Key="ChipBlueFg" Color="#FF1D4ED8" />
+    <SolidColorBrush x:Key="ChipGreenFg" Color="#FF047857" />
+    <SolidColorBrush x:Key="ChipPinkFg" Color="#FFBE185D" />
+
+    <!-- Marka gradyanı: düğmelerde aynı kalır -->
+    <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FF8B5CF6" Offset="0" />
+        <GradientStop Color="#FF6366F1" Offset="0.5" />
+        <GradientStop Color="#FF3B82F6" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AccentGradientHover" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FF7C4DEE" Offset="0" />
+        <GradientStop Color="#FF5558E6" Offset="0.5" />
+        <GradientStop Color="#FF2F73E6" Offset="1" />
+    </LinearGradientBrush>
+    <!-- Açık zeminde okunaklı olması için daha koyu yazı gradyanı -->
+    <LinearGradientBrush x:Key="AccentGradientH" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#FF7C3AED" Offset="0" />
+        <GradientStop Color="#FF4F46E5" Offset="0.5" />
+        <GradientStop Color="#FF2563EB" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="CardBorderBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#141E1B4B" Offset="0" />
+        <GradientStop Color="#101E1B4B" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="SelectedNavBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#2A7B61FF" Offset="0" />
+        <GradientStop Color="#0A7B61FF" Offset="1" />
+    </LinearGradientBrush>
+</ResourceDictionary>

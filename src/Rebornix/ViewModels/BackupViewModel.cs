@@ -421,11 +421,11 @@ public sealed partial class BackupViewModel : ObservableObject, IPageActivated
             Loc.Get("Backup_DoneTitle"), string.Join("\n", lines), Loc.Get("Btn_Ok"));
     }
 
-    /// <summary>Önceki yedek silinmez; _OncekiYedek_TARİH klasörüne taşınır.</summary>
+    /// <summary>Önceki yedek silinmez; _PreviousBackup_TARİH klasörüne taşınır.</summary>
     private static void MovePreviousBackup(BackupLayout layout)
     {
         if (!layout.LooksLikeBackup()) return;
-        var dest = Path.Combine(layout.Root, "_OncekiYedek_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"));
+        var dest = Path.Combine(layout.Root, "_PreviousBackup_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"));
         Directory.CreateDirectory(dest);
         foreach (var dir in new[] { layout.DriversDir, layout.WifiDir, layout.BackupsDir, layout.WindowsSettingsDir })
         {

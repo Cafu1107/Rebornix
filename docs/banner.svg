@@ -44,18 +44,18 @@
   </g>
 
   <text x="345" y="185" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="92" font-weight="800" fill="url(#title)" letter-spacing="-2">Rebornix</text>
-  <text x="349" y="238" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="30" fill="#C9CEDD">Formattan önce yedekle, sonra tek tıkla geri kur.</text>
+  <text x="349" y="238" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="30" fill="#C9CEDD">Back up before you reinstall. Restore in one click.</text>
 
   <g font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" fill="#FFFFFF">
     <rect x="349" y="276" width="140" height="40" rx="20" fill="#7C5CFF" fill-opacity="0.25" stroke="#7C5CFF" stroke-opacity="0.6"/>
-    <text x="419" y="302" text-anchor="middle">Sürücüler</text>
+    <text x="419" y="302" text-anchor="middle">Drivers</text>
     <rect x="501" y="276" width="110" height="40" rx="20" fill="#7C5CFF" fill-opacity="0.25" stroke="#7C5CFF" stroke-opacity="0.6"/>
     <text x="556" y="302" text-anchor="middle">Wi-Fi</text>
     <rect x="623" y="276" width="150" height="40" rx="20" fill="#7C5CFF" fill-opacity="0.25" stroke="#7C5CFF" stroke-opacity="0.6"/>
-    <text x="698" y="302" text-anchor="middle">Uygulamalar</text>
+    <text x="698" y="302" text-anchor="middle">Apps</text>
     <rect x="785" y="276" width="150" height="40" rx="20" fill="#5AA9FF" fill-opacity="0.22" stroke="#5AA9FF" stroke-opacity="0.6"/>
-    <text x="860" y="302" text-anchor="middle">Oyun save'leri</text>
+    <text x="860" y="302" text-anchor="middle">Game saves</text>
     <rect x="947" y="276" width="190" height="40" rx="20" fill="#5AA9FF" fill-opacity="0.22" stroke="#5AA9FF" stroke-opacity="0.6"/>
-    <text x="1042" y="302" text-anchor="middle">Windows ayarları</text>
+    <text x="1042" y="302" text-anchor="middle">Windows settings</text>
   </g>
 </svg>

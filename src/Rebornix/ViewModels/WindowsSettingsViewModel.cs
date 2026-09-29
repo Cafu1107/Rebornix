@@ -35,7 +35,7 @@ public sealed partial class WindowsSettingsViewModel : ObservableObject, IPageAc
     public ObservableCollection<SnapshotRow> Snapshots { get; } = [];
 
     /// <summary>Geri alma anlık görüntüleri bu bilgisayarın durumudur; exe'nin yanında tutulur.</summary>
-    public static string SnapshotsDir => Path.Combine(AppPaths.BaseDir, "WindowsSettings", "_GeriAlma");
+    public static string SnapshotsDir => Path.Combine(AppPaths.BaseDir, "WindowsSettings", "_Undo");
 
     public List<string> SelectedIds() => Choices.Where(c => c.IsSelected).Select(c => c.Id).ToList();
 

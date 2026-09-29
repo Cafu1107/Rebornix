@@ -93,7 +93,7 @@ public sealed class DriverService
         }
 
         Directory.CreateDirectory(driversDir);
-        var staging = Path.Combine(driversDir, "_disa_aktarim_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"));
+        var staging = Path.Combine(driversDir, "_export_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"));
         Directory.CreateDirectory(staging);
         try
         {

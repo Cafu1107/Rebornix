@@ -7,9 +7,7 @@
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/Dark.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+            <!-- Tema (Colors.Dark/Light.xaml + Styles.xaml) kodla yüklenir: Services/ThemeManager.cs -->
 
             <h:BoolToVisibilityConverter x:Key="BoolToVis" />
             <h:BoolToVisibilityConverter x:Key="InvBoolToVis" Invert="True" />
@@ -34,15 +32,7 @@
             <DataTemplate DataType="{x:Type vm:SettingsViewModel}"><v:SettingsView /></DataTemplate>
             <DataTemplate DataType="{x:Type vm:LogsViewModel}"><v:LogsView /></DataTemplate>
 
-            <!-- Durum rozeti (bekliyor / yükleniyor / başarılı / hatalı ...) -->
-            <DataTemplate x:Key="StatusBadge">
-                <Border Style="{StaticResource Badge}" Background="{StaticResource Surface3Brush}">
-                    <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="7" Height="7" Fill="{Binding Converter={StaticResource StatusBrush}}" Margin="0,0,6,0" VerticalAlignment="Center" />
-                        <TextBlock Text="{Binding Converter={StaticResource StatusText}}" Style="{StaticResource BadgeText}" />
-                    </StackPanel>
-                </Border>
-            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

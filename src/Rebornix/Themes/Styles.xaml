@@ -1,70 +1,13 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- ═══════════════ Renkler (tek vurgu rengi: mor) ═══════════════ -->
-    <Color x:Key="BgColor">#FF0A0C13</Color>
-    <Color x:Key="SidebarColor">#FF0F121B</Color>
-    <Color x:Key="SurfaceColor">#FF141824</Color>
-    <Color x:Key="Surface2Color">#FF1B2030</Color>
-    <Color x:Key="Surface3Color">#FF252B3E</Color>
-    <Color x:Key="BorderColor">#FF232A3C</Color>
-    <Color x:Key="TextColor">#FFEEF0F6</Color>
-    <Color x:Key="TextDimColor">#FF8E97AD</Color>
-    <Color x:Key="AccentColor">#FF7B61FF</Color>
-    <Color x:Key="AccentHoverColor">#FF9480FF</Color>
-    <Color x:Key="AccentPressedColor">#FF6649F2</Color>
-    <Color x:Key="AccentSoftColor">#FF221E45</Color>
-    <Color x:Key="SuccessColor">#FF34D399</Color>
-    <Color x:Key="WarningColor">#FFFBBF24</Color>
-    <Color x:Key="DangerColor">#FFF87171</Color>
-    <Color x:Key="InfoColor">#FF60A5FA</Color>
+    <!-- Renkler Colors.Dark.xaml / Colors.Light.xaml içinde; bu dosya sadece stilleri içerir (ThemeManager ikisini birlikte yükler). -->
 
-    <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}" />
-    <SolidColorBrush x:Key="SidebarBrush" Color="{StaticResource SidebarColor}" />
-    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}" />
-    <SolidColorBrush x:Key="Surface2Brush" Color="{StaticResource Surface2Color}" />
-    <SolidColorBrush x:Key="Surface3Brush" Color="{StaticResource Surface3Color}" />
-    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}" />
-    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
-    <SolidColorBrush x:Key="TextDimBrush" Color="{StaticResource TextDimColor}" />
-    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
-    <SolidColorBrush x:Key="AccentHoverBrush" Color="{StaticResource AccentHoverColor}" />
-    <SolidColorBrush x:Key="AccentPressedBrush" Color="{StaticResource AccentPressedColor}" />
-    <SolidColorBrush x:Key="AccentSoftBrush" Color="{StaticResource AccentSoftColor}" />
-    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
-    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}" />
-    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}" />
-    <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource InfoColor}" />
-    <SolidColorBrush x:Key="WarningSoftBrush" Color="#26FBBF24" />
-    <SolidColorBrush x:Key="DangerSoftBrush" Color="#26F87171" />
-    <SolidColorBrush x:Key="InfoSoftBrush" Color="#2260A5FA" />
-    <SolidColorBrush x:Key="SuccessSoftBrush" Color="#2234D399" />
-
-    <!-- Marka gradyanı: mor → indigo → mavi -->
-    <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#FF8B5CF6" Offset="0" />
-        <GradientStop Color="#FF6366F1" Offset="0.5" />
-        <GradientStop Color="#FF3B82F6" Offset="1" />
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="AccentGradientHover" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#FF9D76F8" Offset="0" />
-        <GradientStop Color="#FF7A7DF4" Offset="0.5" />
-        <GradientStop Color="#FF5595F8" Offset="1" />
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="AccentGradientH" StartPoint="0,0" EndPoint="1,0">
+    <!-- Karşılama ekranı her iki temada da koyu zeminlidir; bu yüzden sabit, parlak marka gradyanı -->
+    <LinearGradientBrush x:Key="WelcomeGradient" StartPoint="0,0" EndPoint="1,0">
         <GradientStop Color="#FFA78BFA" Offset="0" />
         <GradientStop Color="#FF818CF8" Offset="0.5" />
         <GradientStop Color="#FF60A5FA" Offset="1" />
-    </LinearGradientBrush>
-    <!-- Kartların üst kenarındaki ince ışık -->
-    <LinearGradientBrush x:Key="CardBorderBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientStop Color="#1FFFFFFF" Offset="0" />
-        <GradientStop Color="#0AFFFFFF" Offset="0.4" />
-        <GradientStop Color="#08FFFFFF" Offset="1" />
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="SelectedNavBrush" StartPoint="0,0" EndPoint="1,0">
-        <GradientStop Color="#447B61FF" Offset="0" />
-        <GradientStop Color="#107B61FF" Offset="1" />
     </LinearGradientBrush>
 
     <FontFamily x:Key="IconFont">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
@@ -169,7 +112,7 @@
         <Setter Property="MinHeight" Value="22" />
         <Setter Property="Padding" Value="10,2,10,2" />
         <Setter Property="Background" Value="#267B61FF" />
-        <Setter Property="BorderBrush" Value="#1FFFFFFF" />
+        <Setter Property="BorderBrush" Value="{StaticResource SubtleBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -177,7 +120,7 @@
     <Style x:Key="BadgeText" TargetType="TextBlock">
         <Setter Property="FontSize" Value="11.5" />
         <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Foreground" Value="#FFD9D2FF" />
+        <Setter Property="Foreground" Value="{StaticResource BadgeTextBrush}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="Banner" TargetType="Border">
@@ -690,8 +633,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
                     <Grid Background="Transparent">
-                        <Border x:Name="Hover" CornerRadius="11" Background="#0FFFFFFF" Opacity="0" />
-                        <Border x:Name="Sel" CornerRadius="11" Background="{StaticResource SelectedNavBrush}" BorderBrush="#1AFFFFFF" BorderThickness="1" Opacity="0" />
+                        <Border x:Name="Hover" CornerRadius="11" Background="{StaticResource HoverOverlayBrush}" Opacity="0" />
+                        <Border x:Name="Sel" CornerRadius="11" Background="{StaticResource SelectedNavBrush}" BorderBrush="{StaticResource SubtleBorderBrush}" BorderThickness="1" Opacity="0" />
                         <Border x:Name="Pill" Width="4" Height="22" CornerRadius="2" Background="{StaticResource AccentGradient}"
                                 HorizontalAlignment="Left" Opacity="0" RenderTransformOrigin="0.5,0.5">
                             <Border.RenderTransform>
@@ -809,5 +752,15 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- Durum rozeti (bekliyor / yükleniyor / başarılı / hatalı ...) -->
+    <DataTemplate x:Key="StatusBadge">
+        <Border Style="{StaticResource Badge}" Background="{StaticResource Surface3Brush}">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse Width="7" Height="7" Fill="{Binding Converter={StaticResource StatusBrush}}" Margin="0,0,6,0" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding Converter={StaticResource StatusText}}" Style="{StaticResource BadgeText}" />
+            </StackPanel>
+        </Border>
+    </DataTemplate>
 
 </ResourceDictionary>

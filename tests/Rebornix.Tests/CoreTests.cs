@@ -25,8 +25,8 @@ public class SafePathTests
     [Theory]
     [InlineData("CON", "_CON")]
     [InlineData("a/b\\c:d*e?f", "a_b_c_d_e_f")]
-    [InlineData("..", "adsiz")]
-    [InlineData("  ", "adsiz")]
+    [InlineData("..", "unnamed")]
+    [InlineData("  ", "unnamed")]
     public void Sanitize(string input, string expected) => Assert.Equal(expected, SafePath.SanitizeFileName(input));
 
     [Fact]
@@ -90,7 +90,13 @@ public class CatalogAndWingetTests
         Assert.All(c.Apps, a => Assert.True(WingetService.IsValidId(a.Id), a.Id));
         Assert.All(c.Apps, a => Assert.Contains(a.Category, c.Categories));
         Assert.Equal(c.Apps.Count, c.Apps.Select(a => a.Id.ToLowerInvariant()).Distinct().Count());
-        Assert.Equal(["Tarayıcılar", "Oyun", "Müzik ve Medya", "İletişim", "Geliştirme", "Araçlar", "Güvenlik", "Ofis"], c.Categories);
+        Assert.Equal(["Browsers", "Gaming", "Media", "Communication", "Development", "Utilities", "Security", "Office"], c.Categories);
+        Assert.All(c.Apps, a =>
+        {
+            Assert.False(string.IsNullOrWhiteSpace(a.Description), a.Id + " en");
+            Assert.False(string.IsNullOrWhiteSpace(a.DescriptionTr), a.Id + " tr");
+            Assert.False(string.IsNullOrWhiteSpace(a.DescriptionDe), a.Id + " de");
+        });
         foreach (var id in new[] { "Google.Chrome", "Mozilla.Firefox", "Brave.Brave", "Valve.Steam", "EpicGames.EpicGamesLauncher",
                      "GOG.Galaxy", "Spotify.Spotify", "Discord.Discord", "VideoLAN.VLC", "7zip.7zip", "Notepad++.Notepad++",
                      "Microsoft.VisualStudioCode", "Git.Git", "Python.Python.3.12", "OBSProject.OBSStudio",

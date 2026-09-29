@@ -4,7 +4,7 @@ using Rebornix.Helpers;
 
 namespace Rebornix.Models;
 
-/// <summary>Data\katalog.json dosyası.</summary>
+/// <summary>Data\catalog.json dosyası.</summary>
 public sealed class CatalogFile
 {
     public int Version { get; set; } = 1;
@@ -16,14 +16,42 @@ public sealed class CatalogApp
 {
     public string Name { get; set; } = "";
     public string Id { get; set; } = "";
+
+    /// <summary>Kategori kimliği (ör. "Browsers"). Görünen ad Strings.resx'teki "Cat_Browsers" metninden gelir.</summary>
     public string Category { get; set; } = "";
+
+    /// <summary>İngilizce açıklama (varsayılan).</summary>
     public string Description { get; set; } = "";
+
+    [JsonPropertyName("description_tr")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? DescriptionTr { get; set; }
+
+    [JsonPropertyName("description_de")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string? DescriptionDe { get; set; }
+
     public bool Default { get; set; }
 
     /// <summary>Boşsa "winget". Microsoft Store uygulamaları için "msstore".</summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Source { get; set; }
+
+    /// <summary>Etkin arayüz dilindeki açıklama; o dilde yoksa İngilizce.</summary>
+    [JsonIgnore]
+    public string LocalizedDescription => Loc.Current switch
+    {
+        "tr" when !string.IsNullOrWhiteSpace(DescriptionTr) => DescriptionTr!,
+        "de" when !string.IsNullOrWhiteSpace(DescriptionDe) => DescriptionDe!,
+        _ => Description
+    };
+
+    /// <summary>Kategori kimliğinin çevrilmiş adı; çevirisi yoksa kimliğin kendisi.</summary>
+    public static string CategoryName(string id) => Loc.TryGet("Cat_" + id) ?? id;
 }
+
+/// <summary>Kategori filtresindeki bir seçenek. Id boşsa "Tüm kategoriler".</summary>
+public sealed record CategoryOption(string Id, string Name);
 
 public partial class CatalogItem : ObservableObject
 {
@@ -37,7 +65,8 @@ public partial class CatalogItem : ObservableObject
     public string Name => App.Name;
     public string Id => App.Id;
     public string Category => App.Category;
-    public string Description => App.Description;
+    public string CategoryName => CatalogApp.CategoryName(App.Category);
+    public string Description => App.LocalizedDescription;
     public string Initial => string.IsNullOrEmpty(App.Name) ? "?" : App.Name[..1].ToUpperInvariant();
 
     [ObservableProperty] private bool _isSelected;

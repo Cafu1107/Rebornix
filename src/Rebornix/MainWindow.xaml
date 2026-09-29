@@ -24,8 +24,8 @@
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#557B61FF" Offset="0" />
-                    <GradientStop Color="#FF232A3C" Offset="0.35" />
-                    <GradientStop Color="#FF232A3C" Offset="1" />
+                    <GradientStop Color="{StaticResource BorderColor}" Offset="0.35" />
+                    <GradientStop Color="{StaticResource BorderColor}" Offset="1" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Grid ClipToBounds="True">
@@ -33,7 +33,7 @@
                 <Ellipse Width="340" Height="300" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-120,-170,0,0" IsHitTestVisible="False">
                     <Ellipse.Fill>
                         <RadialGradientBrush>
-                            <GradientStop Color="#557B61FF" Offset="0" />
+                            <GradientStop Color="{StaticResource SidebarGlowColor}" Offset="0" />
                             <GradientStop Color="#007B61FF" Offset="1" />
                         </RadialGradientBrush>
                     </Ellipse.Fill>
@@ -63,6 +63,18 @@
                     </StackPanel>
 
                     <StackPanel DockPanel.Dock="Bottom" Margin="4,10,4,0">
+                        <!-- Hızlı tema değiştirici + dil seçimi -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{StaticResource IconButton}" Command="{Binding Appearance.ToggleThemeCommand}" Content="{Binding Appearance.ToggleGlyph}"
+                                    ToolTip="{h:Loc Theme_Toggle}" Width="40" Height="36" FontSize="15"
+                                    Background="{StaticResource Surface2Brush}" BorderBrush="{StaticResource BorderBrush}" Foreground="{StaticResource WarningBrush}" />
+                            <ComboBox Grid.Column="1" Margin="8,0,0,0" ItemsSource="{Binding Appearance.Languages}" SelectedItem="{Binding Appearance.SelectedLanguage}"
+                                      DisplayMemberPath="Name" ToolTip="{h:Loc Settings_LanguageTitle}" />
+                        </Grid>
                         <Border Style="{StaticResource Badge}" Background="{StaticResource WarningSoftBrush}" BorderBrush="#40FBBF24" Margin="0,0,0,8"
                                 Visibility="{Binding IsDryRun, Converter={StaticResource BoolToVis}}">
                             <StackPanel Orientation="Horizontal">

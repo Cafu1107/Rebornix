@@ -19,6 +19,9 @@ public sealed partial class WelcomeViewModel : ObservableObject
         _openGuide = openGuide;
     }
 
+    /// <summary>Karşılama ekranındaki dil seçimi için (MainViewModel atar).</summary>
+    public AppearanceViewModel? Appearance { get; set; }
+
     public IReadOnlyList<int> Dots { get; } = Enumerable.Range(0, SlideCount).ToList();
 
     [ObservableProperty] private bool _isOpen;

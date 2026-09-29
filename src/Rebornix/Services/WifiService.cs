@@ -50,7 +50,7 @@ public sealed class WifiService
         // Çıktı loglanmaz; netsh sadece dosya adlarını yazar ama yine de dikkatli olunur.
         var r = await ProcessRunner.RunAsync(Netsh,
             $"wlan export profile key=clear folder={SafePath.Quote(folder)}", ct, logCommand: false);
-        Log.Debug("netsh wlan export profile (key=clear) → geçici klasör, çıkış kodu " + r.ExitCode);
+        Log.Debug("netsh wlan export profile (key=clear) -> temp folder, exit code " + r.ExitCode);
         if (!r.Ok)
             throw new WifiUnavailableException(Loc.Get("Wifi_ServiceUnavailable"));
     }
@@ -101,7 +101,7 @@ public sealed class WifiService
         }
 
         var tmp = SecureFile.CreateWifiTempDir();
-        var tmpTarget = targetFile + ".yaziliyor";
+        var tmpTarget = targetFile + ".writing";
         byte[]? plain = null;
         try
         {
@@ -152,11 +152,11 @@ public sealed class WifiService
         try
         {
             return JsonSerializer.Deserialize<WifiPayload>(plain, Json.Options)
-                   ?? throw new InvalidBackupFileException("Yedek içeriği boş.");
+                   ?? throw new InvalidBackupFileException(Loc.Get("Wifi_EmptyContent"));
         }
         catch (JsonException)
         {
-            throw new InvalidBackupFileException("Yedek içeriği okunamadı.");
+            throw new InvalidBackupFileException(Loc.Get("Wifi_EmptyContent"));
         }
         finally
         {
@@ -188,7 +188,7 @@ public sealed class WifiService
             {
                 ct.ThrowIfCancellationRequested();
                 onStatus?.Invoke(p, ItemStatus.Running, "");
-                var file = Path.Combine(tmp, $"profil_{i++}.xml");
+                var file = Path.Combine(tmp, $"profile_{i++}.xml");
                 try
                 {
                     await File.WriteAllTextAsync(file, p.Xml, new UTF8Encoding(false), ct);

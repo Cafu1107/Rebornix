@@ -108,7 +108,7 @@ public class WifiTests
 
         Assert.Equal(2, n);
         Assert.True(File.Exists(target));
-        Assert.False(File.Exists(target + ".yaziliyor"));
+        Assert.False(File.Exists(target + ".writing"));
         var raw = File.ReadAllText(target, Encoding.Latin1);
         Assert.DoesNotContain("sahte-ev-sifresi", raw);
         Assert.DoesNotContain("SahteEv", raw);

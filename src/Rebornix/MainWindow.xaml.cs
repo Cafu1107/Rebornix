@@ -61,7 +61,7 @@ public partial class MainWindow : Window
         try
         {
             var hwnd = new WindowInteropHelper(this).Handle;
-            var on = 1;
+            var on = ThemeManager.IsDark ? 1 : 0;
             // DWMWA_USE_IMMERSIVE_DARK_MODE (Windows 10 20H1+ = 20, eski sürümler = 19)
             if (DwmSetWindowAttribute(hwnd, 20, ref on, sizeof(int)) != 0)
                 DwmSetWindowAttribute(hwnd, 19, ref on, sizeof(int));

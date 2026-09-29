@@ -45,7 +45,9 @@ public sealed partial class MainViewModel : ObservableObject
         Catalog = new CatalogViewModel(app);
         Onboarding = new OnboardingViewModel(app, Navigate);
         Welcome = new WelcomeViewModel(app, Onboarding.Open);
-        Settings = new SettingsViewModel(app, Onboarding.Open, Welcome.Open);
+        Appearance = new AppearanceViewModel(app, () => SelectedNav?.Key, () => Welcome.IsOpen);
+        Welcome.Appearance = Appearance;
+        Settings = new SettingsViewModel(app, Onboarding.Open, Welcome.Open, Appearance);
         Logs = new LogsViewModel();
         Home = new HomeViewModel(app, Navigate, Onboarding.Open);
 
@@ -88,6 +90,7 @@ public sealed partial class MainViewModel : ObservableObject
     public LogsViewModel Logs { get; }
     public OnboardingViewModel Onboarding { get; }
     public WelcomeViewModel Welcome { get; }
+    public AppearanceViewModel Appearance { get; }
 
     public IReadOnlyList<NavItem> NavItems { get; }
     public ObservableCollection<LogEntry> LogEntries => Log.Entries;

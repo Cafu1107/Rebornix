@@ -37,7 +37,7 @@
                         <Border Style="{StaticResource Badge}" Margin="0,14,0,0" Background="#2660A5FA" BorderBrush="#4460A5FA">
                             <StackPanel Orientation="Horizontal">
                                 <Ellipse Width="6" Height="6" Fill="#FF60A5FA" Margin="0,0,7,0" VerticalAlignment="Center" />
-                                <TextBlock Text="{h:Loc Home_BackupBadge}" Style="{StaticResource BadgeText}" Foreground="#FFBFDBFE" />
+                                <TextBlock Text="{h:Loc Home_BackupBadge}" Style="{StaticResource BadgeText}" Foreground="{StaticResource ChipBlueFg}" />
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -52,7 +52,7 @@
                         <Border Style="{StaticResource Badge}" Margin="0,14,0,0" Background="#2634D399" BorderBrush="#4434D399">
                             <StackPanel Orientation="Horizontal">
                                 <Ellipse Width="6" Height="6" Fill="#FF34D399" Margin="0,0,7,0" VerticalAlignment="Center" />
-                                <TextBlock Text="{h:Loc Home_RestoreBadge}" Style="{StaticResource BadgeText}" Foreground="#FFA7F3D0" />
+                                <TextBlock Text="{h:Loc Home_RestoreBadge}" Style="{StaticResource BadgeText}" Foreground="{StaticResource ChipGreenFg}" />
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -67,7 +67,7 @@
                         <Border Style="{StaticResource Badge}" Margin="0,14,0,0" Background="#26F472B6" BorderBrush="#44F472B6">
                             <StackPanel Orientation="Horizontal">
                                 <Ellipse Width="6" Height="6" Fill="#FFF472B6" Margin="0,0,7,0" VerticalAlignment="Center" />
-                                <TextBlock Text="{h:Loc Home_CatalogBadge}" Style="{StaticResource BadgeText}" Foreground="#FFFBCFE8" />
+                                <TextBlock Text="{h:Loc Home_CatalogBadge}" Style="{StaticResource BadgeText}" Foreground="{StaticResource ChipPinkFg}" />
                             </StackPanel>
                         </Border>
                     </StackPanel>

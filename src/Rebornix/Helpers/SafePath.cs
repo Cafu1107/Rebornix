@@ -18,12 +18,12 @@ public static class SafePath
         ArgumentException.ThrowIfNullOrWhiteSpace(root);
         relative ??= "";
         if (Path.IsPathRooted(relative) || relative.Contains(':'))
-            throw new InvalidOperationException($"Göreli yol bekleniyordu: {relative}");
+            throw new InvalidOperationException($"Relative path expected: {relative}");
 
         var rootFull = Normalize(root);
         var full = Path.GetFullPath(Path.Combine(rootFull, relative));
         if (!IsUnder(full, rootFull))
-            throw new InvalidOperationException($"Yol hedef klasörün dışına çıkıyor: {relative}");
+            throw new InvalidOperationException($"Path escapes the target folder: {relative}");
         return full;
     }
 
@@ -48,12 +48,12 @@ public static class SafePath
     /// <summary>Herhangi bir metni güvenli bir klasör/dosya adına çevirir.</summary>
     public static string SanitizeFileName(string? name, int maxLength = 80)
     {
-        if (string.IsNullOrWhiteSpace(name)) return "adsiz";
+        if (string.IsNullOrWhiteSpace(name)) return "unnamed";
         var invalid = Path.GetInvalidFileNameChars();
         var chars = name.Select(c => invalid.Contains(c) || c < 32 ? '_' : c).ToArray();
         var s = new string(chars).Trim().Trim('.').Trim();
-        if (s.Length == 0 || s.All(c => c == '_')) s = "adsiz";
-        if (s == "." || s == "..") s = "adsiz";
+        if (s.Length == 0 || s.All(c => c == '_')) s = "unnamed";
+        if (s == "." || s == "..") s = "unnamed";
         var stem = s.Split('.')[0];
         if (ReservedNames.Contains(stem, StringComparer.OrdinalIgnoreCase)) s = "_" + s;
         if (s.Length > maxLength) s = s[..maxLength].TrimEnd('.', ' ');
@@ -63,7 +63,7 @@ public static class SafePath
     /// <summary>Komut satırına verilecek yolu tırnaklar. Windows yollarında " karakteri olamaz.</summary>
     public static string Quote(string path)
     {
-        if (path.Contains('"')) throw new ArgumentException("Yolda geçersiz karakter (\").", nameof(path));
+        if (path.Contains('"')) throw new ArgumentException("Invalid character in path (\").", nameof(path));
         // Sondaki ters bölü, kapanış tırnağını kaçırmasın
         if (path.EndsWith('\\')) path += "\\";
         return "\"" + path + "\"";
