@@ -73,7 +73,8 @@
 
             <Border Style="{StaticResource Card}" Margin="0,12,0,0">
                 <DockPanel>
-                    <Button DockPanel.Dock="Right" Content="{h:Loc Home_Guide}" Command="{Binding ShowGuideCommand}" VerticalAlignment="Center" Margin="16,0,0,0" />
+                    <Button DockPanel.Dock="Right" Content="{h:Loc Home_Guide}" Command="{Binding ShowGuideCommand}" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    <Button DockPanel.Dock="Right" Content="{h:Loc Settings_ShowWelcome}" Command="{Binding ShowWelcomeCommand}" VerticalAlignment="Center" Margin="16,0,0,0" />
                     <StackPanel>
                         <TextBlock Text="{h:Loc Settings_GuideTitle}" Style="{StaticResource H3}" />
                         <TextBlock Text="{h:Loc Settings_GuideDesc}" Style="{StaticResource Dim}" Margin="0,4,0,0" />

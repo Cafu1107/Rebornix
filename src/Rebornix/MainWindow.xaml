@@ -152,5 +152,9 @@
         <!-- "Nasıl kullanılır?" tanıtımı (açılışta ve Ana Sayfa / Ayarlar'dan) -->
         <v:OnboardingView Grid.ColumnSpan="2" DataContext="{Binding Onboarding}"
                           Visibility="{Binding IsOpen, Converter={StaticResource BoolToVis}}" />
+
+        <!-- İlk açılış karşılama ekranı (kısa, animasyonlu) -->
+        <v:WelcomeView Grid.ColumnSpan="2" DataContext="{Binding Welcome}"
+                       Visibility="{Binding IsOpen, Converter={StaticResource BoolToVis}}" />
     </Grid>
 </Window>

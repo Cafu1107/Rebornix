@@ -38,8 +38,8 @@ public sealed class AppSettings
     public bool DryRun { get; set; }
     public bool OfferRestorePoint { get; set; } = true;
 
-    /// <summary>Açılışta "Nasıl kullanılır?" tanıtımı gösterilsin mi?</summary>
-    public bool ShowOnboarding { get; set; } = true;
+    /// <summary>İlk açılışta karşılama ekranı gösterilsin mi? (Bir kez gösterilir.)</summary>
+    public bool ShowWelcome { get; set; } = true;
     public string Language { get; set; } = "tr-TR";
     public string? LastBackupRoot { get; set; }
     public DateTime? LastSummaryTime { get; set; }

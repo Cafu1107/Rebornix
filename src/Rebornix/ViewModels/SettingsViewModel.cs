@@ -11,11 +11,13 @@ public sealed partial class SettingsViewModel : ObservableObject, IPageActivated
 {
     private readonly AppServices _app;
     private readonly Action _showGuide;
+    private readonly Action _showWelcome;
 
-    public SettingsViewModel(AppServices app, Action showGuide)
+    public SettingsViewModel(AppServices app, Action showGuide, Action showWelcome)
     {
         _app = app;
         _showGuide = showGuide;
+        _showWelcome = showWelcome;
         _dryRun = app.Settings.Current.DryRun;
         _offerRestorePoint = app.Settings.Current.OfferRestorePoint;
     }
@@ -46,6 +48,9 @@ public sealed partial class SettingsViewModel : ObservableObject, IPageActivated
 
     [RelayCommand]
     private void ShowGuide() => _showGuide();
+
+    [RelayCommand]
+    private void ShowWelcome() => _showWelcome();
 
     [RelayCommand]
     private async Task RefreshStatusAsync()

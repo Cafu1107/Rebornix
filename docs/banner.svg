@@ -5,8 +5,17 @@
       <stop offset="1" stop-color="#191D29"/>
     </linearGradient>
     <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#7C5CFF"/>
-      <stop offset="1" stop-color="#5AA9FF"/>
+      <stop offset="0" stop-color="#8B5CF6"/>
+      <stop offset="0.5" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.2"/>
+      <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C4B5FD"/>
+      <stop offset="1" stop-color="#93C5FD"/>
     </linearGradient>
     <radialGradient id="glow1" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0" stop-color="#7C5CFF" stop-opacity="0.55"/>
@@ -27,13 +36,14 @@
 
   <!-- Logo -->
   <g transform="translate(120,110) scale(2.8)">
-    <rect width="64" height="64" rx="16" fill="url(#accent)"/>
-    <path d="M 32,14 A 18,18 0 1 1 15.4,25.1" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round"/>
-    <path d="M 8,22 L 20,14 L 21,28 Z" fill="#FFF"/>
-    <rect x="25" y="27" width="14" height="12" rx="3" fill="#FFF"/>
+    <rect width="64" height="64" rx="17" fill="url(#accent)"/>
+    <rect width="64" height="64" rx="17" fill="url(#shine)"/>
+    <path d="M 47.43,13.62 A 24,24 0 1 1 16.57,13.62" fill="none" stroke="#FFF" stroke-opacity="0.85" stroke-width="4.2" stroke-linecap="round"/>
+    <path d="M 20.78,10.08 L 18.51,18.26 L 12.34,10.91 Z" fill="#FFF" fill-opacity="0.85"/>
+    <path d="M 25,44 V 20 H 33 A 7,7 0 0 1 33,34 H 25 M 32,34 L 40,44" fill="none" stroke="#FFF" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 
-  <text x="345" y="185" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="92" font-weight="800" fill="#FFFFFF" letter-spacing="-2">Rebornix</text>
+  <text x="345" y="185" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="92" font-weight="800" fill="url(#title)" letter-spacing="-2">Rebornix</text>
   <text x="349" y="238" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="30" fill="#C9CEDD">Formattan önce yedekle, sonra tek tıkla geri kur.</text>
 
   <g font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" fill="#FFFFFF">

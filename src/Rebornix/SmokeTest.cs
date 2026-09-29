@@ -42,6 +42,16 @@ internal static class SmokeTest
             vm.Home.AdminOk = true;
             vm.Home.AdminStatus = Helpers.Loc.Get("Home_AdminOk");
 
+            vm.Welcome.Open();
+            for (var i = 0; i < WelcomeViewModel.SlideCount; i++)
+            {
+                vm.Welcome.Index = i;
+                await Settle(window);
+                await Task.Delay(1200); // giriş animasyonu bitsin
+                Save(window, Path.Combine(dir, $"welcome_{i + 1}.png"));
+            }
+            vm.Welcome.IsOpen = false;
+
             vm.Onboarding.Open();
             for (var i = 0; i < vm.Onboarding.Pages.Count; i++)
             {

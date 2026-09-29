@@ -64,7 +64,7 @@ public partial class App : Application
         vm.Home.OnActivated();
 
         if (smokeDir is not null) _ = SmokeTest.RunAsync(window, vm, smokeDir);
-        else if (_services.Settings.Current.ShowOnboarding) vm.Onboarding.Open();
+        else if (_services.Settings.Current.ShowWelcome) vm.Welcome.Open();
     }
 
     private static void ApplyLanguage(string language)

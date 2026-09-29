@@ -31,7 +31,6 @@ public sealed partial class OnboardingViewModel : ObservableObject
             return new OnboardingPage(g, Loc.Get($"Onb_P{n}_Badge"), Loc.Get($"Onb_P{n}_Title"), Loc.Get($"Onb_P{n}_Intro"),
                 steps, tip.StartsWith('[') ? "" : tip);
         }).ToList();
-        _dontShowAgain = !app.Settings.Current.ShowOnboarding;
         _current = Pages[0];
     }
 
@@ -45,7 +44,6 @@ public sealed partial class OnboardingViewModel : ObservableObject
     private int _index;
 
     [ObservableProperty] private OnboardingPage _current;
-    [ObservableProperty] private bool _dontShowAgain;
 
     public bool IsFirst => Index == 0;
     public bool IsLast => Index == Pages.Count - 1;
@@ -78,12 +76,7 @@ public sealed partial class OnboardingViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void Close()
-    {
-        IsOpen = false;
-        _app.Settings.Current.ShowOnboarding = !DontShowAgain;
-        _app.Settings.Save();
-    }
+    private void Close() => IsOpen = false;
 
     [RelayCommand]
     private void Start(string? page)

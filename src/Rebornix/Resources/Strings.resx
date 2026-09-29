@@ -533,6 +533,35 @@ Kalemler: {1}</value></data>
   <data name="WinSetEx_Cursors_Reason" xml:space="preserve"><value>İmleç dosyaları başka programlardan gelebiliyor; dosya yoksa imleç bozuk görünebilir.</value></data>
   <data name="WinSetEx_TimeZone" xml:space="preserve"><value>Saat dilimi</value></data>
   <data name="WinSetEx_TimeZone_Reason" xml:space="preserve"><value>Sistem geneli bir ayar; Windows konuma göre zaten otomatik ayarlıyor.</value></data>
+  <data name="Settings_ShowWelcome" xml:space="preserve"><value>Karşılama ekranı</value></data>
+  <data name="Wel_Skip" xml:space="preserve"><value>Atla</value></data>
+  <data name="Wel_Next" xml:space="preserve"><value>İleri</value></data>
+  <data name="Wel_Start" xml:space="preserve"><value>Hemen başla</value></data>
+  <data name="Wel_Guide" xml:space="preserve"><value>Nasıl kullanılır?</value></data>
+  <data name="Wel_S1_Kicker" xml:space="preserve"><value>HOŞ GELDİN</value></data>
+  <data name="Wel_S1_Title" xml:space="preserve"><value>Bilgisayarın yeniden doğsun.</value></data>
+  <data name="Wel_S1_Text" xml:space="preserve"><value>Format atmadan önce her şeyi kaydet, sonra tek tıkla geri getir.</value></data>
+  <data name="Wel_S2_Kicker" xml:space="preserve"><value>FORMATTAN ÖNCE</value></data>
+  <data name="Wel_S2_Title" xml:space="preserve"><value>Tek tıkla yedekle</value></data>
+  <data name="Wel_S2_Text" xml:space="preserve"><value>Sürücülerin, Wi-Fi şifrelerin, programların, oyun kayıtların ve ayarların ikinci diskte tek klasörde.</value></data>
+  <data name="Wel_S3_Kicker" xml:space="preserve"><value>FORMATTAN SONRA</value></data>
+  <data name="Wel_S3_Title" xml:space="preserve"><value>Her şey yerine döner</value></data>
+  <data name="Wel_S3_Text" xml:space="preserve"><value>Doğru sırayla ve otomatik. Sen sadece izle.</value></data>
+  <data name="Wel_S4_Kicker" xml:space="preserve"><value>GÜVENLİ VE KOLAY</value></data>
+  <data name="Wel_S4_Title" xml:space="preserve"><value>Hazırsan başlayalım</value></data>
+  <data name="Wel_S4_Text" xml:space="preserve"><value>Kurulum yok, tamamen Türkçe, her adım geri alınabilir.</value></data>
+  <data name="Wel_Chip_Drivers" xml:space="preserve"><value>Sürücüler</value></data>
+  <data name="Wel_Chip_Wifi" xml:space="preserve"><value>Wi-Fi</value></data>
+  <data name="Wel_Chip_Apps" xml:space="preserve"><value>Programlar</value></data>
+  <data name="Wel_Chip_Games" xml:space="preserve"><value>Oyunlar</value></data>
+  <data name="Wel_Chip_Settings" xml:space="preserve"><value>Ayarlar</value></data>
+  <data name="Wel_Disk" xml:space="preserve"><value>İkinci disk</value></data>
+  <data name="Wel_F1_Title" xml:space="preserve"><value>Şifreli</value></data>
+  <data name="Wel_F1_Text" xml:space="preserve"><value>Wi-Fi şifrelerin AES-256 ile korunur.</value></data>
+  <data name="Wel_F2_Title" xml:space="preserve"><value>Geri alınabilir</value></data>
+  <data name="Wel_F2_Text" xml:space="preserve"><value>Ayarların her zaman eski haline döner.</value></data>
+  <data name="Wel_F3_Title" xml:space="preserve"><value>Deneme modu</value></data>
+  <data name="Wel_F3_Text" xml:space="preserve"><value>Hiçbir şeyi değiştirmeden önce dene.</value></data>
   <data name="Home_Guide" xml:space="preserve"><value>Nasıl kullanılır?</value></data>
   <data name="Settings_GuideTitle" xml:space="preserve"><value>Kullanım rehberi</value></data>
   <data name="Settings_GuideDesc" xml:space="preserve"><value>Açılışta gösterilen adım adım anlatımı tekrar aç.</value></data>

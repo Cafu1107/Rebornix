@@ -29,8 +29,8 @@
             <UniformGrid Columns="3">
                 <Button Style="{StaticResource ModeCardButton}" Command="{Binding GoBackupCommand}" Margin="0,0,10,0">
                     <StackPanel>
-                        <Border Width="52" Height="52" CornerRadius="14" Background="{StaticResource AccentSoftBrush}" HorizontalAlignment="Left">
-                            <TextBlock Text="&#xE74E;" Style="{StaticResource Icon}" FontSize="24" HorizontalAlignment="Center" Foreground="{StaticResource AccentHoverBrush}" />
+                        <Border Width="52" Height="52" CornerRadius="15" Background="{StaticResource AccentGradient}" HorizontalAlignment="Left">
+                            <TextBlock Text="&#xE74E;" Style="{StaticResource Icon}" FontSize="24" HorizontalAlignment="Center" Foreground="White" />
                         </Border>
                         <TextBlock Text="{h:Loc Home_BackupTitle}" Style="{StaticResource H2}" Margin="0,16,0,6" />
                         <TextBlock Text="{h:Loc Home_BackupDesc}" Style="{StaticResource Dim}" />
@@ -41,8 +41,8 @@
                 </Button>
                 <Button Style="{StaticResource ModeCardButton}" Command="{Binding GoRestoreCommand}" Margin="5,0,5,0">
                     <StackPanel>
-                        <Border Width="52" Height="52" CornerRadius="14" Background="{StaticResource AccentSoftBrush}" HorizontalAlignment="Left">
-                            <TextBlock Text="&#xE777;" Style="{StaticResource Icon}" FontSize="24" HorizontalAlignment="Center" Foreground="{StaticResource AccentHoverBrush}" />
+                        <Border Width="52" Height="52" CornerRadius="15" Background="{StaticResource AccentGradient}" HorizontalAlignment="Left">
+                            <TextBlock Text="&#xE777;" Style="{StaticResource Icon}" FontSize="24" HorizontalAlignment="Center" Foreground="White" />
                         </Border>
                         <TextBlock Text="{h:Loc Home_RestoreTitle}" Style="{StaticResource H2}" Margin="0,16,0,6" />
                         <TextBlock Text="{h:Loc Home_RestoreDesc}" Style="{StaticResource Dim}" />
@@ -53,8 +53,8 @@
                 </Button>
                 <Button Style="{StaticResource ModeCardButton}" Command="{Binding GoCatalogCommand}" Margin="10,0,0,0">
                     <StackPanel>
-                        <Border Width="52" Height="52" CornerRadius="14" Background="{StaticResource AccentSoftBrush}" HorizontalAlignment="Left">
-                            <TextBlock Text="&#xE71D;" Style="{StaticResource Icon}" FontSize="24" HorizontalAlignment="Center" Foreground="{StaticResource AccentHoverBrush}" />
+                        <Border Width="52" Height="52" CornerRadius="15" Background="{StaticResource AccentGradient}" HorizontalAlignment="Left">
+                            <TextBlock Text="&#xE71D;" Style="{StaticResource Icon}" FontSize="24" HorizontalAlignment="Center" Foreground="White" />
                         </Border>
                         <TextBlock Text="{h:Loc Home_CatalogTitle}" Style="{StaticResource H2}" Margin="0,16,0,6" />
                         <TextBlock Text="{h:Loc Home_CatalogDesc}" Style="{StaticResource Dim}" />

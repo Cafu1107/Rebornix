@@ -2,22 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- ═══════════════ Renkler (tek vurgu rengi: mor) ═══════════════ -->
-    <Color x:Key="BgColor">#FF0E1016</Color>
-    <Color x:Key="SidebarColor">#FF13161F</Color>
-    <Color x:Key="SurfaceColor">#FF191D29</Color>
-    <Color x:Key="Surface2Color">#FF222738</Color>
-    <Color x:Key="Surface3Color">#FF2B3146</Color>
-    <Color x:Key="BorderColor">#FF2A3043</Color>
-    <Color x:Key="TextColor">#FFE9EBF2</Color>
-    <Color x:Key="TextDimColor">#FF9AA1B6</Color>
-    <Color x:Key="AccentColor">#FF7C5CFF</Color>
-    <Color x:Key="AccentHoverColor">#FF9277FF</Color>
-    <Color x:Key="AccentPressedColor">#FF6A4AEB</Color>
-    <Color x:Key="AccentSoftColor">#FF2A2356</Color>
-    <Color x:Key="SuccessColor">#FF3DDC97</Color>
-    <Color x:Key="WarningColor">#FFFFB547</Color>
-    <Color x:Key="DangerColor">#FFFF5C7A</Color>
-    <Color x:Key="InfoColor">#FF5AA9FF</Color>
+    <Color x:Key="BgColor">#FF0A0C13</Color>
+    <Color x:Key="SidebarColor">#FF0F121B</Color>
+    <Color x:Key="SurfaceColor">#FF141824</Color>
+    <Color x:Key="Surface2Color">#FF1B2030</Color>
+    <Color x:Key="Surface3Color">#FF252B3E</Color>
+    <Color x:Key="BorderColor">#FF232A3C</Color>
+    <Color x:Key="TextColor">#FFEEF0F6</Color>
+    <Color x:Key="TextDimColor">#FF8E97AD</Color>
+    <Color x:Key="AccentColor">#FF7B61FF</Color>
+    <Color x:Key="AccentHoverColor">#FF9480FF</Color>
+    <Color x:Key="AccentPressedColor">#FF6649F2</Color>
+    <Color x:Key="AccentSoftColor">#FF221E45</Color>
+    <Color x:Key="SuccessColor">#FF34D399</Color>
+    <Color x:Key="WarningColor">#FFFBBF24</Color>
+    <Color x:Key="DangerColor">#FFF87171</Color>
+    <Color x:Key="InfoColor">#FF60A5FA</Color>
 
     <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}" />
     <SolidColorBrush x:Key="SidebarBrush" Color="{StaticResource SidebarColor}" />
@@ -35,14 +35,36 @@
     <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}" />
     <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}" />
     <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource InfoColor}" />
-    <SolidColorBrush x:Key="WarningSoftBrush" Color="#33FFB547" />
-    <SolidColorBrush x:Key="DangerSoftBrush" Color="#33FF5C7A" />
-    <SolidColorBrush x:Key="InfoSoftBrush" Color="#2A5AA9FF" />
-    <SolidColorBrush x:Key="SuccessSoftBrush" Color="#2A3DDC97" />
+    <SolidColorBrush x:Key="WarningSoftBrush" Color="#26FBBF24" />
+    <SolidColorBrush x:Key="DangerSoftBrush" Color="#26F87171" />
+    <SolidColorBrush x:Key="InfoSoftBrush" Color="#2260A5FA" />
+    <SolidColorBrush x:Key="SuccessSoftBrush" Color="#2234D399" />
 
+    <!-- Marka gradyanı: mor → indigo → mavi -->
     <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Color="#FF7C5CFF" Offset="0" />
-        <GradientStop Color="#FF5AA9FF" Offset="1" />
+        <GradientStop Color="#FF8B5CF6" Offset="0" />
+        <GradientStop Color="#FF6366F1" Offset="0.5" />
+        <GradientStop Color="#FF3B82F6" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AccentGradientHover" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#FF9D76F8" Offset="0" />
+        <GradientStop Color="#FF7A7DF4" Offset="0.5" />
+        <GradientStop Color="#FF5595F8" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AccentGradientH" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#FFA78BFA" Offset="0" />
+        <GradientStop Color="#FF818CF8" Offset="0.5" />
+        <GradientStop Color="#FF60A5FA" Offset="1" />
+    </LinearGradientBrush>
+    <!-- Kartların üst kenarındaki ince ışık -->
+    <LinearGradientBrush x:Key="CardBorderBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#1FFFFFFF" Offset="0" />
+        <GradientStop Color="#0AFFFFFF" Offset="0.4" />
+        <GradientStop Color="#08FFFFFF" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="SelectedNavBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#447B61FF" Offset="0" />
+        <GradientStop Color="#107B61FF" Offset="1" />
     </LinearGradientBrush>
 
     <FontFamily x:Key="IconFont">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
@@ -53,21 +75,36 @@
     <DrawingImage x:Key="LogoImage">
         <DrawingImage.Drawing>
             <DrawingGroup>
+                <!-- Gradyan kare -->
                 <GeometryDrawing Brush="{StaticResource AccentGradient}">
                     <GeometryDrawing.Geometry>
-                        <RectangleGeometry Rect="0,0,64,64" RadiusX="16" RadiusY="16" />
+                        <RectangleGeometry Rect="0,0,64,64" RadiusX="17" RadiusY="17" />
                     </GeometryDrawing.Geometry>
                 </GeometryDrawing>
-                <GeometryDrawing Geometry="M 32,14 A 18,18 0 1 1 15.4,25.1">
+                <!-- Üstten hafif parlaklık -->
+                <GeometryDrawing>
+                    <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#33FFFFFF" Offset="0" />
+                            <GradientStop Color="#00FFFFFF" Offset="0.55" />
+                        </LinearGradientBrush>
+                    </GeometryDrawing.Brush>
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0,64,64" RadiusX="17" RadiusY="17" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <!-- Yeniden doğuş halkası (dairesel ok) -->
+                <GeometryDrawing Geometry="M 47.43,13.62 A 24,24 0 1 1 16.57,13.62">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="White" Thickness="6" StartLineCap="Round" EndLineCap="Round" />
+                        <Pen Brush="#D9FFFFFF" Thickness="4.2" StartLineCap="Round" EndLineCap="Round" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
-                <GeometryDrawing Brush="White" Geometry="M 8,22 L 20,14 L 21,28 Z" />
-                <GeometryDrawing Brush="White">
-                    <GeometryDrawing.Geometry>
-                        <RectangleGeometry Rect="25,27,14,12" RadiusX="3" RadiusY="3" />
-                    </GeometryDrawing.Geometry>
+                <GeometryDrawing Brush="#D9FFFFFF" Geometry="M 20.78,10.08 L 18.51,18.26 L 12.34,10.91 Z" />
+                <!-- Monogram R -->
+                <GeometryDrawing Geometry="M 25,44 V 20 H 33 A 7,7 0 0 1 33,34 H 25 M 32,34 L 40,44">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="White" Thickness="5.5" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                    </GeometryDrawing.Pen>
                 </GeometryDrawing>
             </DrawingGroup>
         </DrawingImage.Drawing>
@@ -116,9 +153,9 @@
     <!-- ═══════════════ Kartlar / rozetler ═══════════════ -->
     <Style x:Key="Card" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource CardBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="CornerRadius" Value="16" />
         <Setter Property="Padding" Value="20" />
     </Style>
     <Style x:Key="InnerCard" TargetType="Border">
@@ -128,7 +165,7 @@
     </Style>
     <Style x:Key="Badge" TargetType="Border">
         <Setter Property="CornerRadius" Value="999" />
-        <Setter Property="Padding" Value="9,2" />
+        <Setter Property="Padding" Value="10,3,10,4" />
         <Setter Property="Background" Value="{StaticResource AccentSoftBrush}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -178,13 +215,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" SnapsToDevicePixels="True">
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10" SnapsToDevicePixels="True">
                         <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="Center" RecognizesAccessKey="True" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource Surface3Brush}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#557B61FF" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource BorderBrush}" />
@@ -199,26 +237,41 @@
     </Style>
 
     <Style x:Key="AccentButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-        <Setter Property="Background" Value="{StaticResource AccentBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+        <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="8" SnapsToDevicePixels="True">
-                        <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="Center" RecognizesAccessKey="True" />
-                    </Border>
+                    <Grid x:Name="Root" RenderTransformOrigin="0.5,0.5">
+                        <Border x:Name="Glow" Background="{TemplateBinding Background}" CornerRadius="10" Opacity="0.55">
+                            <Border.Effect>
+                                <BlurEffect Radius="14" />
+                            </Border.Effect>
+                        </Border>
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" CornerRadius="10" SnapsToDevicePixels="True">
+                            <Border CornerRadius="10" BorderThickness="0,1,0,0" BorderBrush="#40FFFFFF">
+                                <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="Center" RecognizesAccessKey="True" />
+                            </Border>
+                        </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentHoverBrush}" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentGradientHover}" />
+                            <Setter TargetName="Glow" Property="Opacity" Value="0.85" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentPressedBrush}" />
+                            <Setter TargetName="Root" Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.97" ScaleY="0.97" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.45" />
+                            <Setter TargetName="Glow" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -227,7 +280,14 @@
     </Style>
 
     <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource AccentButton}">
-        <Setter Property="Background" Value="{StaticResource DangerBrush}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#FFF87171" Offset="0" />
+                    <GradientStop Color="#FFE11D48" Offset="1" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="GhostButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
@@ -636,7 +696,7 @@
                             <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentSoftBrush}" />
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource SelectedNavBrush}" />
                             <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard>

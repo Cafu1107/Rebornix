@@ -21,6 +21,7 @@
             <h:EqualsToVisibilityConverter x:Key="EqVis" />
             <h:PlusOneConverter x:Key="PlusOne" />
             <h:SameObjectConverter x:Key="SameObject" />
+            <h:SameValueConverter x:Key="SameValue" />
 
             <!-- Her sayfa modeli kendi görünümüyle eşleşir -->
             <DataTemplate DataType="{x:Type vm:HomeViewModel}"><v:HomeView /></DataTemplate>

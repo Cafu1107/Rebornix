@@ -140,7 +140,6 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <TextBlock Text="{Binding StepText}" Style="{StaticResource Caption}" VerticalAlignment="Center" Margin="10,0,22,0" />
-                            <CheckBox IsChecked="{Binding DontShowAgain}" Content="{h:Loc Onb_DontShow}" FontSize="12.5" Foreground="{StaticResource TextDimBrush}" />
                         </StackPanel>
                     </DockPanel>
                 </Border>

@@ -23,7 +23,8 @@ public sealed partial class MainViewModel : ObservableObject
         Restore = new RestoreViewModel(app);
         Catalog = new CatalogViewModel(app);
         Onboarding = new OnboardingViewModel(app, Navigate);
-        Settings = new SettingsViewModel(app, Onboarding.Open);
+        Welcome = new WelcomeViewModel(app, Onboarding.Open);
+        Settings = new SettingsViewModel(app, Onboarding.Open, Welcome.Open);
         Logs = new LogsViewModel();
         Home = new HomeViewModel(app, Navigate, Onboarding.Open);
 
@@ -65,6 +66,7 @@ public sealed partial class MainViewModel : ObservableObject
     public SettingsViewModel Settings { get; }
     public LogsViewModel Logs { get; }
     public OnboardingViewModel Onboarding { get; }
+    public WelcomeViewModel Welcome { get; }
 
     public IReadOnlyList<NavItem> NavItems { get; }
     public ObservableCollection<LogEntry> LogEntries => Log.Entries;

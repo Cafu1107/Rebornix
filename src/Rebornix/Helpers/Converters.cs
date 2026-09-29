@@ -113,6 +113,14 @@ public sealed class SameObjectConverter : IMultiValueConverter
     public object[] ConvertBack(object value, Type[] targetTypes, object? parameter, CultureInfo culture) => [];
 }
 
+/// <summary>İki bağlanan değer eşitse (Equals) true; sayılar için.</summary>
+public sealed class SameValueConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object? parameter, CultureInfo culture) =>
+        values.Length == 2 && Equals(values[0], values[1]);
+    public object[] ConvertBack(object value, Type[] targetTypes, object? parameter, CultureInfo culture) => [];
+}
+
 public sealed class EqualsToVisibilityConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>

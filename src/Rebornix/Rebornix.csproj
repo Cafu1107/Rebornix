@@ -11,7 +11,7 @@
     <AssemblyName>Rebornix</AssemblyName>
     <ApplicationIcon>Assets\Rebornix.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Product>Rebornix</Product>
     <Description>Format öncesi yedekleme, format sonrası geri yükleme ve toplu uygulama kurulumu aracı</Description>
     <NeutralLanguage>tr-TR</NeutralLanguage>

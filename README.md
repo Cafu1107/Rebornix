@@ -55,11 +55,20 @@ Yukarıdaki **"Rebornix.exe İNDİR"** düğmesine tıkla. Dosya İndirilenler k
 2. **"Bu uygulamanın cihazınızda değişiklik yapmasına izin veriyor musunuz?"** sorusuna **Evet** de.
    <sub>Sürücüleri ve Wi-Fi ayarlarını okuyabilmesi için yönetici izni gerekiyor.</sub>
 
-Program açılınca **adım adım bir rehber** çıkar ve sana ne yapman gerektiğini sayfa sayfa anlatır. 🎉
+Program ilk açılışta seni kısa, animasyonlu bir **karşılama ekranıyla** tanıştırır. Son sayfada iki seçenek var:
+- **Hemen başla** → programa geçersin.
+- **Nasıl kullanılır?** → formattan önce ve sonra ne yapman gerektiğini adım adım anlatan **rehber** açılır. Bu rehbere istediğin zaman Ana Sayfa'daki **"Nasıl kullanılır?"** düğmesinden de ulaşabilirsin. 🎉
 
-<p align="center">
-  <img src="docs/screenshots/guide_1.png" alt="Açılış rehberi" width="80%">
-</p>
+<table>
+  <tr>
+    <td><img src="docs/screenshots/welcome_1.png" alt="Karşılama ekranı"></td>
+    <td><img src="docs/screenshots/welcome_2.png" alt="Karşılama: formattan önce"></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/welcome_3.png" alt="Karşılama: formattan sonra"></td>
+    <td><img src="docs/screenshots/welcome_4.png" alt="Karşılama: başla"></td>
+  </tr>
+</table>
 
 ---
 

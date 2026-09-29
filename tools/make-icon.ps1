@@ -26,22 +26,40 @@ function Render([int]$size) {
     $g.ScaleTransform($s, $s)
 
     $bg = New-RoundRect 0 0 64 64 16
-    $brush = New-Object System.Drawing.Drawing2D.LinearGradientBrush (New-Object System.Drawing.PointF 0, 0), (New-Object System.Drawing.PointF 64, 64), ([System.Drawing.Color]::FromArgb(255, 0x7C, 0x5C, 0xFF)), ([System.Drawing.Color]::FromArgb(255, 0x5A, 0xA9, 0xFF))
+    # Marka gradyanı: mor → indigo → mavi
+    $brush = New-Object System.Drawing.Drawing2D.LinearGradientBrush (New-Object System.Drawing.PointF 0, 0), (New-Object System.Drawing.PointF 64, 64), ([System.Drawing.Color]::White), ([System.Drawing.Color]::White)
+    $blend = New-Object System.Drawing.Drawing2D.ColorBlend 3
+    $blend.Colors = [System.Drawing.Color[]]@([System.Drawing.Color]::FromArgb(255, 0x8B, 0x5C, 0xF6), [System.Drawing.Color]::FromArgb(255, 0x63, 0x66, 0xF1), [System.Drawing.Color]::FromArgb(255, 0x3B, 0x82, 0xF6))
+    $blend.Positions = [single[]]@(0, 0.5, 1)
+    $brush.InterpolationColors = $blend
     $g.FillPath($brush, $bg)
 
-    # Dairesel ok: merkez (32,32), yarıçap 18, üstten saat yönünde ~293 derece
-    $pen = New-Object System.Drawing.Pen ([System.Drawing.Color]::White), 6
+    # Üstten hafif parlaklık
+    $shine = New-Object System.Drawing.Drawing2D.LinearGradientBrush (New-Object System.Drawing.PointF 0, -1), (New-Object System.Drawing.PointF 0, 65), ([System.Drawing.Color]::White), ([System.Drawing.Color]::White)
+    $sb = New-Object System.Drawing.Drawing2D.ColorBlend 3
+    $sb.Colors = [System.Drawing.Color[]]@([System.Drawing.Color]::FromArgb(51, 255, 255, 255), [System.Drawing.Color]::FromArgb(0, 255, 255, 255), [System.Drawing.Color]::FromArgb(0, 255, 255, 255))
+    $sb.Positions = [single[]]@(0, 0.55, 1)
+    $shine.InterpolationColors = $sb
+    $g.FillPath($shine, $bg)
+
+    # Yeniden doğuş halkası: merkez (32,32), yarıçap 24, -50°'den saat yönünde 280°
+    $ringColor = [System.Drawing.Color]::FromArgb(217, 255, 255, 255)
+    $pen = New-Object System.Drawing.Pen $ringColor, 4.2
     $pen.StartCap = 'Round'; $pen.EndCap = 'Round'
-    $g.DrawArc($pen, 14, 14, 36, 36, -90, 292.6)
+    $g.DrawArc($pen, 8, 8, 48, 48, -50, 280)
+    $tri = [System.Drawing.PointF[]]@((New-Object System.Drawing.PointF 20.78, 10.08), (New-Object System.Drawing.PointF 18.51, 18.26), (New-Object System.Drawing.PointF 12.34, 10.91))
+    $g.FillPolygon((New-Object System.Drawing.SolidBrush $ringColor), $tri)
 
-    # Ok ucu
-    $white = New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::White)
-    $tri = [System.Drawing.PointF[]]@((New-Object System.Drawing.PointF 8, 22), (New-Object System.Drawing.PointF 20, 14), (New-Object System.Drawing.PointF 21, 28))
-    $g.FillPolygon($white, $tri)
-
-    # Ortadaki disk
-    $disk = New-RoundRect 25 27 14 12 3
-    $g.FillPath($white, $disk)
+    # Monogram R
+    $rPen = New-Object System.Drawing.Pen ([System.Drawing.Color]::White), 5.5
+    $rPen.StartCap = 'Round'; $rPen.EndCap = 'Round'; $rPen.LineJoin = 'Round'
+    $r = New-Object System.Drawing.Drawing2D.GraphicsPath
+    $r.AddLine(25, 44, 25, 20)
+    $r.AddLine(25, 20, 33, 20)
+    $r.AddArc(26, 20, 14, 14, -90, 180)
+    $r.AddLine(33, 34, 25, 34)
+    $g.DrawPath($rPen, $r)
+    $g.DrawLine($rPen, 32, 34, 40, 44)
 
     $g.Dispose()
     return $bmp
